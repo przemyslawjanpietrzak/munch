@@ -1,0 +1,53 @@
+{
+    "rasa_nlu_data": {
+        "common_examples": [
+            {
+                "text": "show me scream",
+                "intent": "find_by_title",
+                "entities": [
+                    {
+                    "start": 8,
+                    "end": 14,
+                    "value": "scream",
+                    "entity": "paint"
+                    }
+                ]
+            }, {
+                "text": "i want to see scream",
+                "intent": "find_by_title",
+                "entities": [
+                    {
+                    "start": 14,
+                    "end": 20,
+                    "value": "scream",
+                    "entity": "paint"
+                    }
+                ]
+            }, {
+                "text": "show me a picture painted by munch",
+                "intent": "find_by_author",
+                "entities": [
+                    {
+                    "start": 29,
+                    "end": 34,
+                    "value": "munch",
+                    "entity": "paint"
+                    }
+                ]
+            }, {
+                "text": "get picture of munch",
+                "intent": "find_by_author",
+                "entities": [
+                    {
+                    "start": 15,
+                    "end": 20,
+                    "value": "munch",
+                    "entity": "paint"
+                    }
+                ]
+            }
+        ],
+        "regex_features" : [],
+        "entity_synonyms": []
+    }
+}

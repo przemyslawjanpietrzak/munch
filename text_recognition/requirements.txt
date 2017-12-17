@@ -1,0 +1,5 @@
+sklearn_crfsuite
+spacy
+sklearn
+rasa_nlu
+scipy
