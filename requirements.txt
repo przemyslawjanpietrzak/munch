@@ -3,3 +3,4 @@ xlrd
 jupyter
 pony
 falcon
+pytest
