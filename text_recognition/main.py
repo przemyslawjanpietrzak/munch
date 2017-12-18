@@ -1,8 +1,12 @@
-from rasa_nlu.converters import load_data
+from rasa_nlu.model import Metadata, Interpreter
 from rasa_nlu.config import RasaNLUConfig
-from rasa_nlu.model import Trainer
 
-training_data = load_data('data.json')
-trainer = Trainer(RasaNLUConfig('config.json'))
-trainer.train(training_data)
-model_directory = trainer.persist('models/')
+
+config = RasaNLUConfig("config.json")
+
+
+interpreter = Interpreter.load('./models/default/model_20171218-002056/', config)
+
+
+def parse_question(question):
+    return interpreter.parse(question)
