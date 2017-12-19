@@ -2,3 +2,5 @@
 data
 database.sqlite
 text_recognition/logs
+text_recognition/models
+text_recognition/projects
