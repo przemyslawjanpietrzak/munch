@@ -9,3 +9,6 @@ test:
 
 train:
 	python text_recognition/train.py
+
+trainer:
+	 rasa-nlu-trainer

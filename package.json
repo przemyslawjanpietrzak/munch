@@ -1,0 +1,19 @@
+{
+  "name": "munch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/przemyslawjanpietrzak/munch.git"
+  },
+  "author": "Przemyslaw Jan Pietrzak",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/przemyslawjanpietrzak/munch#readme",
+  "devDependencies": {
+    "rasa-nlu-trainer": "0.2.7"
+  }
+}
