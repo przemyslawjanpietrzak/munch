@@ -1,0 +1,2 @@
+class PaintingNotFound(Exception):
+    pass

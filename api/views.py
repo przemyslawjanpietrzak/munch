@@ -1,12 +1,15 @@
-from api.managers import find_paint_url
+from api.managers import find_painting
+from api.exceptions import PaintingNotFound
 
 import falcon
 
 
-class PaintView:
+class PaintingView:
 
-    def on_get(self, request, response, name):
-        paint_url = find_paint_url(name)
-        if paint_url is None:
+    def on_get(self, request, response, question):
+        try:
+            painting_url = find_painting(question)
+            response.body = painting_url
+        except PaintingNotFound:
             response.status = falcon.HTTP_404
-        response.body = paint_url
+        
