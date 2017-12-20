@@ -6,9 +6,7 @@ from pony.orm import db_session, commit
 db.bind(provider='sqlite', filename='/home/przemyslaw/code/munch/database.sqlite', create_db=True)
 db.generate_mapping(create_tables=True)
 
-
 data = pd.read_csv('./data/data.csv')
-
 
 @db_session
 def create_entities():
