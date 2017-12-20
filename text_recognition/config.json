@@ -1,4 +1,6 @@
 {
+    "project": "munch",
+    "fixed_model_name": "munch",
     "pipeline": "spacy_sklearn",
     "path" : "./projects",
     "data" : "./data.json"
