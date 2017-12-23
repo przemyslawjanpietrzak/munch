@@ -8,9 +8,9 @@ import botocore
 s3 = boto3.resource('s3')
 
     
-def download_file():
+def download_file(file_name):
     try:
-        s3.Bucket(BUCKET_NAME).download_file('data.csv', 'data/data.csv')
+        s3.Bucket(BUCKET_NAME).download_file(file_name, 'data/{}'.format(file_name))
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             print("The object does not exist.")
@@ -18,4 +18,5 @@ def download_file():
             raise
 
 
-download_file()
+download_file('data.csv')
+download_file('new.xls')

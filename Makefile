@@ -14,6 +14,7 @@ trainer:
 	npm run rasa-nlu-trainer
 
 download_data:
+	mkdir -p data
 	python -c 'import scripts.download_data'
 
 upload_data:
@@ -22,3 +23,8 @@ upload_data:
 create_db:
 	python -c 'import scripts.create_db'
 
+clean_db:
+	rm database.sqlite
+
+clean_data:
+	rm -rf data
