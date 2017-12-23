@@ -8,13 +8,16 @@ test:
 	pytest **/tests.py
 
 train:
-	python text_recognition/train.py
+	python text_recogn2ition/train.py
 
 trainer:
 	npm run rasa-nlu-trainer
 
 download_data:
 	python -c 'import scripts.download_data'
+
+upload_data:
+	python -c 'import scripts.upload_data'
 
 create_db:
 	python -c 'import scripts.create_db'
