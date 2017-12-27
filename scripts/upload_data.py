@@ -1,12 +1,11 @@
 
-from settings.main import BUCKET_NAME
+from settings.main import S3_BUCKET_NAME, AWS_PROFILE_NAME
 
 import boto3
 import botocore
 
-
-s3 = boto3.resource('s3')
-
+session = boto3.Session(profile_name=AWS_PROFILE_NAME)
+s3 = session.resource('s3')
 
 def open_file(path):
     with open(path, 'r') as file:
@@ -14,12 +13,12 @@ def open_file(path):
     
 
 def upload(path, key):
-    s3.Bucket(BUCKET_NAME).put_object(
+    s3.Bucket(S3_BUCKET_NAME).put_object(
         ACL='public-read',
         Body=open_file(path),
         Key=key
     )
 
 
-upload('Makefile', 'Makefile')
-
+upload('data/data.csv', 'data.csv')
+# upload('data/new.xls', 'new.xls')
