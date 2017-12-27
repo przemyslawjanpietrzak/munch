@@ -28,3 +28,7 @@ clean_db:
 
 clean_data:
 	rm -rf data
+
+clean:
+	make clean_db
+	make clean_data

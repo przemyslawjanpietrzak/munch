@@ -1,0 +1,10 @@
+language: python
+python: 3.5
+install:
+  - make install
+script:
+  - make clean
+  - make download_data 
+  - make create_db 
+  - make train
+  - make test 
