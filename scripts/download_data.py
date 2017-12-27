@@ -5,7 +5,7 @@ import boto3
 import botocore
 
 
-s3 = boto3.resource('s3')
+s3 = boto3.resource('s3', region_name='eu-central-1')
 
     
 def download_file(file_name):
