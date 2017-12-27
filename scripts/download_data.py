@@ -11,11 +11,15 @@ import botocore
 import os
 
 
-if os.environ[ENVIRONMENT_KEY] == ENVIRONMENT_CI:
-    s3 = boto3.client(
+def _get_env_value(key):
+    return os.environ[key]  
+
+
+if _get_env_value(ENVIRONMENT_KEY) == ENVIRONMENT_CI:
+    s3 = boto3.resource(
         's3',
-        aws_access_key_id=AWS_SECRET_ACCESS_KEY,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+        aws_access_key_id=_get_env_value(AWS_ACCESS_KEY_ID),
+        aws_secret_access_key=_get_env_value(AWS_SECRET_ACCESS_KEY)
     )
 else:
     session = boto3.Session(profile_name=AWS_PROFILE_NAME)
