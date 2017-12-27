@@ -29,7 +29,7 @@ create_db:
 	python -c 'import scripts.create_db'
 
 clean_db:
-	rm database.sqlite
+	rm -f database.sqlite
 
 clean_data:
 	rm -rf data
