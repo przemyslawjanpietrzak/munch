@@ -15,7 +15,9 @@ def _get_env_value(key):
     return os.environ[key]  
 
 
-if _get_env_value(ENVIRONMENT_KEY) == ENVIRONMENT_CI:
+print(os.environ['test42'])
+
+if ENVIRONMENT_KEY in os.environ and os.environ[ENVIRONMENT_KEY] == ENVIRONMENT_CI:
     s3 = boto3.resource(
         's3',
         aws_access_key_id=_get_env_value(AWS_ACCESS_KEY_ID),
