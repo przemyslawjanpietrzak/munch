@@ -1,6 +1,8 @@
 from api.views import PaintingView
 from api.models import db
 
+from settings.main import BASE_DIR
+
 import falcon
 
 
@@ -10,7 +12,7 @@ class App(falcon.API):
 
         self.add_route('/painting/{question}', PaintingView())
 
-        db.bind(provider='sqlite', filename='/home/przemyslaw/code/munch/database.sqlite')
+        db.bind(provider='sqlite', filename='{}database.sqlite'.format(BASE_DIR))
         db.generate_mapping()
 
 

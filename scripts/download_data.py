@@ -15,8 +15,6 @@ def _get_env_value(key):
     return os.environ[key]  
 
 
-print(os.environ['test42'])
-
 if ENVIRONMENT_KEY in os.environ and os.environ[ENVIRONMENT_KEY] == ENVIRONMENT_CI:
     s3 = boto3.resource(
         's3',
@@ -27,7 +25,7 @@ else:
     session = boto3.Session(profile_name=AWS_PROFILE_NAME)
     s3 = session.resource('s3')
 
-    
+
 def download_file(file_name):
     try:
         s3.Bucket(S3_BUCKET_NAME).download_file(file_name, 'data/{}'.format(file_name))
