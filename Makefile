@@ -1,5 +1,10 @@
 install:
-	pip install -r requirements.txt && python -m spacy download en
+	pip install -r requirements.txt
+	python -m spacy download en
+
+install-dev:
+	pip install -r requirements-dev.txt
+	npm install
 
 server:
 	gunicorn --reload api.main:application
@@ -8,7 +13,7 @@ test:
 	pytest **/tests.py
 
 train:
-	python text_recogn2ition/train.py
+	python text_recognition/train.py
 
 trainer:
 	npm run rasa-nlu-trainer
@@ -24,7 +29,15 @@ create_db:
 	python -c 'import scripts.create_db'
 
 clean_db:
-	rm database.sqlite
+	rm -f database.sqlite
 
 clean_data:
 	rm -rf data
+
+clean_models:
+	rm -rf text_recognition/models
+
+clean:
+	make clean_db
+	make clean_data
+	make clean_models
