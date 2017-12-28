@@ -34,6 +34,10 @@ clean_db:
 clean_data:
 	rm -rf data
 
+clean_models:
+	rm -rf text_recognition/models
+
 clean:
 	make clean_db
 	make clean_data
+	make clean_models
