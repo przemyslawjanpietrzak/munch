@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/przemyslawjanpietrzak/munch.svg?branch=develop)](https://travis-ci.org/przemyslawjanpietrzak/munch)
+[![Build Status](https://travis-ci.org/przemyslawjanpietrzak/munch.svg?branch=develop)](https://travis-ci.org/przemyslawjanpietrzak/munch) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Edvard Munch
 
