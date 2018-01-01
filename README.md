@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/przemyslawjanpietrzak/munch.svg?branch=develop)](https://travis-ci.org/przemyslawjanpietrzak/munch)
+
 # Edvard Munch
 
 /mʊŋk/ Norwegian painter whose intensely evocative treatment of psychological themes built upon some of the main tenets of late 19th-century Symbolism and greatly influenced German Expressionism in the early 20th century.
