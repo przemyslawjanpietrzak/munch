@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+- sudo: true
+  vars:
+
+
+  tasks:
+
+    - name: Safe system upgrade via apt
+      apt: upgrade=safe
+    
+    - name: Install packages
+      apt: install "{{ item }}"
+      with_items:
+        - python-pip
+        - python3-dev
+        - build-essential
+
+    - name: Install global python requirements
+      pip: name={{ item }} state=present
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+
+    - name: create virtualenv
+    - mkvirtualenv: munch
+    - extra_args: --python=/usr/bin/python3
+        

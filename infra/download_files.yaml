@@ -5,12 +5,21 @@
     profile_name: munch
 
   tasks:
-  - name: download clean data
-    s3:
-      bucket: "{{ bucket_name }}"
-      object: data.csv
-      dest: data/data.csv
-      mode: get
-      profile: "{{ profile_name }}"
-      region: eu-central-1
+    - name: download clean data
+      s3:
+        bucket: "{{ bucket_name }}"
+        object: data.csv
+        dest: data/data.csv
+        mode: get
+        profile: "{{ profile_name }}"
+        region: eu-central-1
+
+    - name: download dirty data
+      s3:
+        bucket: "{{ bucket_name }}"
+        object: data.csv
+        dest: data/news.xls
+        mode: get
+        profile: "{{ profile_name }}"
+        region: eu-central-1
       
