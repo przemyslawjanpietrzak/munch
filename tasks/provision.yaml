@@ -5,6 +5,7 @@
     - venv_name: munch
     - venv_dir: ~/venvs/munch
     - venv_bin: ~/venvs/munch/bin
+    - ansible_build: True
 
   tasks:
 
