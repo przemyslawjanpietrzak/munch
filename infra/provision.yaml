@@ -1,28 +1,33 @@
 ---
-- hosts: localhost
-- sudo: true
-  vars:
 
+- hosts: localhost
+  vars:
+    - venv_name: munch
 
   tasks:
 
     - name: Safe system upgrade via apt
-      apt: upgrade=safe
+      apt:
+        name: aptitude
     
     - name: Install packages
-      apt: install "{{ item }}"
+      apt:
+        name: "{{ item }}"
       with_items:
         - python-pip
         - python3-dev
         - build-essential
 
     - name: Install global python requirements
-      pip: name={{ item }} state=present
+      pip: name={{ item }}
       with_items:
         - virtualenv
         - virtualenvwrapper
+    
 
-    - name: create virtualenv
-    - mkvirtualenv: munch
-    - extra_args: --python=/usr/bin/python3
-        
+    - name: Make a virtualenv
+      shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && mkvirtualenv {{ venv_name }} --python=/usr/bin/python3
+      args:
+        executable: /bin/bash
+
+              
