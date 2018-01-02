@@ -28,18 +28,23 @@
   
     - name: Make a virtualenv
       command: virtualenv "{{ venv_dir }}" -p python3
+      when: ansible_build
 
     - name: Install depencenccies
       pip: requirements=~/code/munch/requirements.txt virtualenv="{{ venv_dir }}"
+      when: ansible_build
     
     - name: Download spiCy EN
       command: "{{ venv_bin }}/python -m spacy download en"
+      when: ansible_build
 
     - name: Create database
       command: "{{ venv_bin }}/python -m scripts.create_db"
+      when: ansible_build
 
     - name: Train model
       command: "{{ venv_bin }}/python text_recognition/train.py"
+      when: ansible_build
 
     - name: Run server
       command: "{{ venv_bin }}/gunicorn --reload api.main:application"
