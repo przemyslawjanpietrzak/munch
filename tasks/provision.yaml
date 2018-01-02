@@ -46,6 +46,3 @@
     - name: Train model
       command: "{{ venv_bin }}/python text_recognition/train.py"
       when: ansible_build
-
-    - name: Run server
-      command: "{{ venv_bin }}/gunicorn --reload api.main:application"

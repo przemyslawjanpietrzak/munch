@@ -3,9 +3,13 @@
   vars:
     bucket_name: munch-bucket1
     profile_name: munch
+    download_dirty_data: False
 
-  tasks:
-    - name: download clean data
+  tasks: 
+    - name: Craete dir
+      command: mkdir -p data
+    
+    - name: Download clean data
       s3:
         bucket: "{{ bucket_name }}"
         object: data.csv
@@ -22,4 +26,4 @@
         mode: get
         profile: "{{ profile_name }}"
         region: eu-central-1
-      
+      when: download_dirty_data
