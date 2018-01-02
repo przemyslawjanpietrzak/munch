@@ -1,0 +1,52 @@
+---
+
+- hosts: localhost
+  vars:
+    - venv_name: munch
+
+  tasks:
+
+    - name: Safe system upgrade via apt
+      apt:
+        name: aptitude
+    
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - python-pip
+        - python3-dev
+        - build-essential
+
+    - name: Install global python requirements
+      pip: name={{ item }}
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+          
+    # - name: Make a virtualenv
+    #   shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && mkvirtualenv --python=/usr/bin/python3  {{ venv_name }} 
+    #   args:
+    #     executable: /bin/bash
+# 
+    # - name: Install depencencies
+    #   make:
+    #     chdir: .
+    #     target: install
+
+    - name: Set venv
+      shell: source ./munch/bin/activate
+      args:
+        executable: /bin/bash
+    
+    - name: Build trained model
+      shell: make download_data && make create_db && make train
+      args:
+        executable: /bin/bash
+
+    - name: Test Munch
+      make:
+        chdir: .
+        target: test
+      
+              

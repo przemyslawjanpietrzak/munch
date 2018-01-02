@@ -6,7 +6,7 @@ import pandas as pd
 from pony.orm import db_session, commit
 
 
-db.bind(provider='sqlite', filename='{}database.sqlite'.format(BASE_DIR), create_db=True)
+db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR), create_db=True)
 db.generate_mapping(create_tables=True)
 
 data = pd.read_csv('data/data.csv')
