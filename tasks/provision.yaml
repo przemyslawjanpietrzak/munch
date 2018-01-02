@@ -3,6 +3,8 @@
 - hosts: localhost
   vars:
     - venv_name: munch
+    - venv_dir: ~/venvs/munch
+    - venv_bin: ~/venvs/munch/bin
 
   tasks:
 
@@ -23,30 +25,21 @@
       with_items:
         - virtualenv
         - virtualenvwrapper
-          
-    # - name: Make a virtualenv
-    #   shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && mkvirtualenv --python=/usr/bin/python3  {{ venv_name }} 
-    #   args:
-    #     executable: /bin/bash
-# 
-    # - name: Install depencencies
-    #   make:
-    #     chdir: .
-    #     target: install
+  
+    - name: Make a virtualenv
+      command: virtualenv "{{ venv_dir }}" -p python3
 
-    - name: Set venv
-      shell: source ./munch/bin/activate
-      args:
-        executable: /bin/bash
+    - name: Install depencenccies
+      pip: requirements=~/code/munch/requirements.txt virtualenv="{{ venv_dir }}"
     
-    - name: Build trained model
-      shell: make download_data && make create_db && make train
-      args:
-        executable: /bin/bash
+    - name: Download spiCy EN
+      command: "{{ venv_bin }}/python -m spacy download en"
 
-    - name: Test Munch
-      make:
-        chdir: .
-        target: test
-      
-              
+    - name: Create database
+      command: "{{ venv_bin }}/python -m scripts.create_db"
+
+    - name: Train model
+      command: "{{ venv_bin }}/python text_recognition/train.py"
+
+    - name: Run server
+      command: "{{ venv_bin }}/gunicorn --reload api.main:application"
