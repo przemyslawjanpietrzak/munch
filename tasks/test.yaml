@@ -1,0 +1,4 @@
+---
+- name: Run tests
+  command: "{{ venv_bin }}/pytest ~/code/munch/api/tests.py"
+    

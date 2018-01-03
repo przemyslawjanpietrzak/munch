@@ -5,7 +5,12 @@
     - venv_name: munch
     - venv_dir: ~/venvs/munch
     - venv_bin: ~/venvs/munch/bin
+
+    - bucket_name: munch-bucket1
+    - profile_name: munch
+
     - ansible_build: True
+    - download_dirty_data: False
 
   tasks:
 
@@ -31,6 +36,8 @@
       command: virtualenv "{{ venv_dir }}" -p python3
       when: ansible_build
 
+    - include: download_files.yaml
+        
     - name: Install depencenccies
       pip: requirements=~/code/munch/requirements.txt virtualenv="{{ venv_dir }}"
       when: ansible_build
@@ -46,3 +53,7 @@
     - name: Train model
       command: "{{ venv_bin }}/python text_recognition/train.py"
       when: ansible_build
+
+    - include: test.yaml
+
+
