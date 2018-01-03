@@ -2,6 +2,8 @@
 
 - hosts: localhost
   vars:
+    - base_dir: "{{ playbook_dir }}/.."
+
     - venv_name: munch
     - venv_dir: ~/venvs/munch
     - venv_bin: ~/venvs/munch/bin
@@ -9,17 +11,12 @@
     - bucket_name: munch-chatbot
     - profile_name: munch
 
-    - ansible_build: True
+    - new_build: True
     - download_dirty_data: False
-
     - travis: False
 
   tasks:
-
-    # - name: Safe system upgrade via apt
-    #   apt:
-    #     name: aptitude
-    
+   
     - name: Install packages
       apt:
         name: "{{ item }}"
@@ -28,6 +25,7 @@
         - python3-dev
         - build-essential
       when: not travis
+      sudo: yes
 
     - name: Install global python requirements
       pip: name={{ item }}
@@ -37,26 +35,14 @@
   
     - name: Make a virtualenv
       command: virtualenv "{{ venv_dir }}" -p python3
-      when: ansible_build
+      when: new_build
 
     - include: download_files.yaml
         
-    - name: Install depencenccies
-      pip: requirements=~/code/munch/requirements.txt virtualenv="{{ venv_dir }}"
-      when: ansible_build
+    - name: Install depencencies
+      pip: requirements={{ base_dir }}/requirements.txt virtualenv="{{ venv_dir }}"
+      when: new_build
     
-    - name: Download spiCy EN
+    - name: Download spaCy EN
       command: "{{ venv_bin }}/python -m spacy download en"
-      when: ansible_build
-
-    - name: Create database
-      command: "{{ venv_bin }}/python -m scripts.create_db"
-      when: ansible_build
-
-    - name: Train model
-      command: "{{ venv_bin }}/python text_recognition/train.py"
-      when: ansible_build
-
-    - include: test.yaml
-
-
+      when: new_build

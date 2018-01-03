@@ -9,4 +9,7 @@ install:
   - ansible-playbook tasks/provision.yaml --extra-vars "travis=True"
 
 script:
+  - source ~/venvs/munch/bin/activate
+  - make create_db
+  - make train
   - make test

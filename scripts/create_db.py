@@ -29,5 +29,4 @@ def create_entities():
         )
     commit()
 
-print('as')
 create_entities()
