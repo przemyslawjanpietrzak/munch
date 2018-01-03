@@ -6,7 +6,7 @@
     - venv_dir: ~/venvs/munch
     - venv_bin: ~/venvs/munch/bin
 
-    - bucket_name: munch-bucket1
+    - bucket_name: munch-chatbot
     - profile_name: munch
 
     - ansible_build: True

@@ -12,7 +12,6 @@ before_install:
   - sudo apt-get update -qq
 install:
   - pip install ansible
-  - ansible-playbook tasks/download_files.yaml
   - ansible-playbook tasks/provision.yaml
 
 script:
