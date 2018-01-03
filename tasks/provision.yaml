@@ -14,9 +14,9 @@
 
   tasks:
 
-    - name: Safe system upgrade via apt
-      apt:
-        name: aptitude
+    # - name: Safe system upgrade via apt
+    #   apt:
+    #     name: aptitude
     
     - name: Install packages
       apt:
