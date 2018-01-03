@@ -12,6 +12,8 @@
     - ansible_build: True
     - download_dirty_data: False
 
+    - travis: False
+
   tasks:
 
     # - name: Safe system upgrade via apt
@@ -25,6 +27,7 @@
         - python-pip
         - python3-dev
         - build-essential
+      when: not travis
 
     - name: Install global python requirements
       pip: name={{ item }}
