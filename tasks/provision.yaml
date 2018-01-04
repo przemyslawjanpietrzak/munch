@@ -1,0 +1,48 @@
+---
+
+- hosts: localhost
+  vars:
+    - base_dir: "{{ playbook_dir }}/.."
+
+    - venv_name: munch
+    - venv_dir: ~/venvs/munch
+    - venv_bin: ~/venvs/munch/bin
+
+    - bucket_name: munch-chatbot
+    - profile_name: munch
+
+    - new_build: True
+    - download_dirty_data: False
+    - travis: False
+
+  tasks:
+   
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - python-pip
+        - python3-dev
+        - build-essential
+      when: not travis
+      sudo: yes
+
+    - name: Install global python requirements
+      pip: name={{ item }}
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+  
+    - name: Make a virtualenv
+      command: virtualenv "{{ venv_dir }}" -p python3
+      when: new_build
+
+    - include: download_files.yaml
+        
+    - name: Install depencencies
+      pip: requirements={{ base_dir }}/requirements.txt virtualenv="{{ venv_dir }}"
+      when: new_build
+    
+    - name: Download spaCy EN
+      command: "{{ venv_bin }}/python -m spacy download en"
+      when: new_build

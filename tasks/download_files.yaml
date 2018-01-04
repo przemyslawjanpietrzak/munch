@@ -1,0 +1,22 @@
+---
+- name: Craete dir
+  command: "mkdir -p {{ base_dir }}/data"
+
+- name: Download clean data
+  aws_s3:
+    bucket: "{{ bucket_name }}"
+    object: data.csv
+    dest: "{{ base_dir }}/data/data.csv"
+    mode: get
+    region: eu-central-1
+    # profile: "{{ profile_name }}"
+
+- name: Download dirty data
+  aws_s3:
+    bucket: "{{ bucket_name }}"
+    object: news.xls
+    dest: "{{ base_dir }}/data/news.xls"
+    mode: get
+    # profile: "{{ profile_name }}"
+    region: eu-central-1
+  when: download_dirty_data
