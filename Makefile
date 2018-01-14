@@ -1,3 +1,6 @@
+python=~/.virtualenvs/munch/bin/python
+
+
 install:
 	pip install -r requirements.txt
 	python -m spacy download en
@@ -26,7 +29,7 @@ upload_data:
 	python -c 'import scripts.upload_data'
 
 create_db:
-	python -c 'import scripts.create_db'
+	$(python) -c 'import scripts.create_db'
 
 clean_db:
 	rm -f database.sqlite

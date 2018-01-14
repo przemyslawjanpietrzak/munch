@@ -10,7 +10,7 @@ s3 = session.resource('s3')
 def open_file(path):
     with open(path, 'r') as file:
         return file.read()
-    
+   
 
 def upload(path, key):
     s3.Bucket(S3_BUCKET_NAME).put_object(

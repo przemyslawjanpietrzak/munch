@@ -1,22 +1,12 @@
 ---
-
 - hosts: localhost
+
+  vars_files:
+    - vars.yaml
   vars:
     - base_dir: "{{ playbook_dir }}/.."
 
-    - venv_name: munch
-    - venv_dir: ~/venvs/munch
-    - venv_bin: ~/venvs/munch/bin
-
-    - bucket_name: munch-chatbot
-    - profile_name: munch
-
-    - new_build: True
-    - download_dirty_data: False
-    - travis: False
-
   tasks:
-   
     - name: Install packages
       apt:
         name: "{{ item }}"
@@ -40,7 +30,7 @@
     - include: download_files.yaml
         
     - name: Install depencencies
-      pip: requirements={{ base_dir }}/requirements.txt virtualenv="{{ venv_dir }}"
+      pip: requirements=requirements.txt virtualenv="{{ venv_dir }}"
       when: new_build
     
     - name: Download spaCy EN

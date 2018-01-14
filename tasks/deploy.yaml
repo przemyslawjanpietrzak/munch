@@ -1,0 +1,47 @@
+- hosts: munch
+  remote_user: ubuntu
+  vars_files:
+    - vars.yaml
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_private_key_file }}"
+    base_dir: "{{ playbook_dir }}/.."
+
+  pre_tasks:
+    - name: install python2 for ansible
+      raw: sudo apt-get -y install python-simplejson
+
+  tasks:
+    - name: Echo a hello message
+      command: echo hello
+
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - git
+        - python-pip
+        - python3-dev
+        - build-essential
+        - python-virtualenv
+      when: not travis
+      become: true
+      su: yes
+      su_user: root
+  
+    - name: Make a virtualenv
+      command: virtualenv "{{ venv_dir }}" -p python3
+      when: new_build
+
+    - name: Clone repo
+      git:
+        repo: 'https://github.com/przemyslawjanpietrzak/munch'
+        dest: ./munch
+        update: yes
+        
+    - name: Install depencencies
+      pip: requirements=~/munch/requirements.txt virtualenv="{{ venv_dir }}"
+      when: new_build
+
+    - name: Download data
+      command: make -C munch/ download_data
+    

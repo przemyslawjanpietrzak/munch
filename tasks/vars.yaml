@@ -1,0 +1,12 @@
+ssh_private_key_file: ~/.ssh/munch-prod.pem
+
+venv_name: munch
+venv_dir: ~/.virtualenvs/munch
+venv_bin: ~/.virtualenvs/munch/bin
+
+bucket_name: munch-chatbot
+profile_name: munch
+
+new_build: True
+download_dirty_data: False
+travis: False
