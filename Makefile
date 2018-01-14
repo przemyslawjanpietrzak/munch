@@ -23,10 +23,10 @@ trainer:
 
 download_data:
 	mkdir -p data
-	python -c 'import scripts.download_data'
+	$(python) -c 'import scripts.download_data'
 
 upload_data:
-	python -c 'import scripts.upload_data'
+	$(python) -c 'import scripts.upload_data'
 
 create_db:
 	$(python) -c 'import scripts.create_db'
