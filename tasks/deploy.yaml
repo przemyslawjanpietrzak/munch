@@ -42,6 +42,11 @@
       pip: requirements=~/munch/requirements.txt virtualenv="{{ venv_dir }}"
       when: new_build
 
+    # - name: Download data
+    #   command: make -C munch/ download_data
+
     - name: Download data
-      command: make -C munch/ download_data
+      get_url: url=https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv dest=~/munch/data
     
+    - name: Create database
+      command: make -C munch/ create_db

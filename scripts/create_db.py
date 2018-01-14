@@ -2,31 +2,32 @@ from api.models import db, Paint
 
 from settings.main import BASE_DIR
 
-import pandas as pd
 from pony.orm import db_session, commit
 
+import csv
 
 db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR), create_db=True)
 db.generate_mapping(create_tables=True)
 
-data = pd.read_csv('data/data.csv')
 
 @db_session
 def create_entities():
-    for _, item in data.iterrows():
-        p = Paint(
-            author=item['AUTHOR'],
-            title=item['TITLE'],
-            date=item['DATE'],
-            technique=item['TECHNIQUE'],
-            location=item['LOCATION'],
-            url=item['URL'],
-            form=item['FORM'],
-            type_of=item['TYPE'],
-            school=item['SCHOOL'],
-            timeframe_start=item['TIMEFRAME_START'],
-            timeframe_end=item['TIMEFRAME_END'],
-        )
+    with open('data/data.csv', 'r') as csvfile:
+        data = csv.DictReader(csvfile)
+        for row in data:
+            paint = Paint(
+                author=row['AUTHOR'],
+                title=row['TITLE'],
+                date=row['DATE'],
+                technique=row['TECHNIQUE'],
+                location=row['LOCATION'],
+                url=row['URL'],
+                form=row['FORM'],
+                type_of=row['TYPE'],
+                school=row['SCHOOL'],
+                timeframe_start=row['TIMEFRAME_START'],
+                timeframe_end=row['TIMEFRAME_END'],
+            )
     commit()
 
 create_entities()
