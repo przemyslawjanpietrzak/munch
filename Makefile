@@ -1,4 +1,5 @@
 python=~/.virtualenvs/munch/bin/python
+gunicorn=~/.virtualenvs/munch/bin/gunicorn
 
 
 install:
@@ -10,7 +11,7 @@ install-dev:
 	npm install
 
 server:
-	gunicorn --reload api.main:application
+	$(gunicorn) --reload api.main:application
 
 test:
 	pytest **/tests.py
