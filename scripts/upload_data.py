@@ -8,7 +8,7 @@ session = boto3.Session(profile_name=AWS_PROFILE_NAME)
 s3 = session.resource('s3')
 
 def open_file(path):
-    with open(path, 'r') as file:
+    with open(path, 'rb') as file:
         return file.read()
    
 
@@ -21,4 +21,9 @@ def upload(path, key):
 
 
 upload('data/data.csv', 'data.csv')
-# upload('data/new.xls', 'new.xls')
+upload('text_recognition/models/default/model/crf_model.pkl', 'crf_model.pkl')
+upload('text_recognition/models/default/model/entity_synonyms.json', 'entity_synonyms.json')
+upload('text_recognition/models/default/model/intent_classifier.pkl', 'intent_classifier.pkl')
+upload('text_recognition/models/default/model/metadata.json', 'metadata.json')
+upload('text_recognition/models/default/model/training_data.json', 'training_data.json')
+upload('data/new.xls', 'new.xls')

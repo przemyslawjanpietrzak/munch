@@ -1,4 +1,4 @@
-from rasa_nlu.model import Metadata, Interpreter
+from rasa_nlu.model import Interpreter
 from rasa_nlu.config import RasaNLUConfig
 
 

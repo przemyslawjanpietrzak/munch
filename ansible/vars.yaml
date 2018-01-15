@@ -5,6 +5,7 @@ venv_dir: ~/.virtualenvs/munch
 venv_bin: ~/.virtualenvs/munch/bin
 
 bucket_name: munch-chatbot
+bucket_url: https://s3.eu-central-1.amazonaws.com/munch-chatbot
 profile_name: munch
 
 new_build: True
