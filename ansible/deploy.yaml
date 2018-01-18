@@ -1,5 +1,6 @@
 - hosts: munch
   remote_user: ubuntu
+  gather_facts: no
   vars_files:
     - vars.yaml
   vars:
@@ -25,9 +26,7 @@
         - python-virtualenv
       when: not travis
       become: true
-      su: yes
-      su_user: root
-  
+
     - name: Make a virtualenv
       command: virtualenv "{{ venv_dir }}" -p python3
       when: new_build
@@ -42,11 +41,14 @@
       pip: requirements=~/munch/requirements.txt virtualenv="{{ venv_dir }}"
       when: new_build
 
+    - name: mkdir
+      command: "mkdir -p {{ item }}"
+      with_items: 
+        - ~/munch/text_recognition/models/default/model
+        - ~/munch/data
+
     - name: Download data
       get_url: url={{ bucket_url }}/data.csv dest=~/munch/data
-
-    - name: mkdir
-      command: mkdir -p ~/munch/text_recognition/models/default/model
 
     - name: Download model
       get_url: "url={{ item }} dest=~/munch/text_recognition/models/default/model"
@@ -62,4 +64,3 @@
 
     - name: Run server
       command: make -C munch/ server
-      chdir: 
