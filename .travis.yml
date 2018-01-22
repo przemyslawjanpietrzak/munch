@@ -1,15 +1,11 @@
-language: python
+language:
+  - python
 python: 3.5
 cache: pip
-sudo: required
-before_install:
-  - sudo apt-get update -qq
 install:
-  - pip install ansible boto3
-  - ansible-playbook tasks/provision.yaml --extra-vars "travis=True"
-
+  - make install
+  - make install-dev
 script:
-  - source ~/venvs/munch/bin/activate
   - make create_db
   - make train
   - make test

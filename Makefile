@@ -1,5 +1,6 @@
 python=~/.virtualenvs/munch/bin/python
 gunicorn=~/.virtualenvs/munch/bin/gunicorn
+pytest=~/.virtualenvs/munch/bin/pytest
 
 
 install:
@@ -14,7 +15,7 @@ server:
 	$(gunicorn) --reload api.main:application
 
 test:
-	pytest **/tests.py
+	$(pytest) **/tests.py
 
 train:
 	python text_recognition/train.py
@@ -24,7 +25,7 @@ trainer:
 
 download_data:
 	mkdir -p data
-	$(python) -c 'import scripts.download_data'
+	wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv -O data/data.csv
 
 upload_data:
 	$(python) -c 'import scripts.upload_data'
