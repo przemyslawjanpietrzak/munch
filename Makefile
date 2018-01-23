@@ -18,7 +18,7 @@ test:
 	$(pytest) **/tests.py
 
 train:
-	python text_recognition/train.py
+	$(python) text_recognition/train.py
 
 trainer:
 	npm run rasa-nlu-trainer

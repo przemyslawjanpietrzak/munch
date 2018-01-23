@@ -3,6 +3,7 @@ language:
 python: 3.5
 cache: pip
 install:
+  - mkvirtualenv --python=/usr/bin/python3 munch
   - make install
   - make install-dev
 script:
