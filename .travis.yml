@@ -4,10 +4,10 @@ python: 3.5
 cache: pip
 install:
   - virtualenv -p python3 ~/.virtualenvs/munch
+  - source ~/.virtualenvs/munch/bin/activate
   - make install
   - make install-dev
 script:
-  - source ~/.virtualenvs/munch/bin/activate
   - make create_db
   - make train
   - make test
