@@ -8,6 +8,7 @@ install:
   - make install
   - make install-dev
 script:
+  - make download_data
   - make create_db
   - make train
   - make test
