@@ -10,4 +10,4 @@ RUN make create_db
 
 EXPOSE 8000
 
-CMD ["make", "server"].
+CMD ["make", "test"].
