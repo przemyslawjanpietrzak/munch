@@ -7,7 +7,13 @@
 ### Chatbot
 For finding painting purpose. Base on Rasa_NLU natural language processing, Falcon HTTP handling.
 
-### Deploy
+### Run 
+
+`docker pull przemyslawjanpietrzak/munch:first` pull docker image
+
+`docker run -i -t --network host munch:latest` run docker container on port 8000
+
+### Build
 `make install` - install python's libs and spyCy en package
 
 `make download_data` - download cleaned csv data from S3 bucket or clean data by clean_data jupyter notebook file.
