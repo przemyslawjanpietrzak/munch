@@ -15,7 +15,7 @@ server:
 	gunicorn --reload api.main:application
 
 test:
-	pytest **/tests.py
+	pytest text_recognition/test*.py  api/test*.py
 
 train:
 	python text_recognition/train.py

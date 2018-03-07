@@ -8,3 +8,4 @@ spacy
 sklearn_crfsuite
 sklearn
 scipy
+pytest
