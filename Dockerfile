@@ -9,6 +9,5 @@ RUN make train
 RUN make create_db
 RUN make test
 
+CMD ["make", "server"]
 EXPOSE 8000
-
-CMD ["make", "server"].

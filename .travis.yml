@@ -6,6 +6,6 @@ cache: pip
 services:
   - docker
 
-install:
+script:
   docker build -t munch .
 

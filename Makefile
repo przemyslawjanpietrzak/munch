@@ -12,10 +12,10 @@ install-dev:
 	npm install
 
 server:
-	gunicorn --reload api.main:application
+	gunicorn api.main:application
 
 test:
-	pytest text_recognition/test*.py  api/test*.py
+	pytest text_recognition/test*.py api/test*.py
 
 train:
 	python text_recognition/train.py
