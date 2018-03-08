@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001"
+    "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001",
+    "clean": "rm -rf dist",
+    "build:css": "node-sass webapp/style.sass --output dist/",
+    "build:html": "pug -- --pretty webapp/index.pug --out dist/",
+    "build": "npm run clean && npm run build:css && npm run build:html"
   },
   "repository": {
     "type": "git",
@@ -14,6 +18,12 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/przemyslawjanpietrzak/munch#readme",
   "devDependencies": {
+    "haml": "^0.4.3",
+    "node-sass": "^4.7.2",
+    "pug": "^2.0.0",
     "rasa-nlu-trainer": "0.2.7"
+  },
+  "dependencies": {
+    "pug-cli": "^1.0.0-alpha6"
   }
 }
