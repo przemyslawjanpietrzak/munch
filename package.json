@@ -18,12 +18,13 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/przemyslawjanpietrzak/munch#readme",
   "devDependencies": {
-    "haml": "^0.4.3",
-    "node-sass": "^4.7.2",
-    "pug": "^2.0.0",
-    "rasa-nlu-trainer": "0.2.7"
+    "haml": "0.4.3",
+    "node-sass": "4.7.2",
+    "pug": "2.0.0",
+    "rasa-nlu-trainer": "0.2.7",
+    "pug-cli": "1.0.0-alpha6"
   },
   "dependencies": {
-    "pug-cli": "^1.0.0-alpha6"
+    
   }
 }
