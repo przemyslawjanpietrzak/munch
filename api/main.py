@@ -1,4 +1,4 @@
-from api.views import PaintingView
+from api.views import PaintingView, StaticResource
 from api.models import db
 
 from settings.main import BASE_DIR
@@ -11,9 +11,13 @@ class App(falcon.API):
         super(App, self).__init__(*args, **kwargs)
 
         self.add_route('/painting/{question}', PaintingView())
+        self.add_route('/{filename}', StaticResource())
 
         db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR))
         db.generate_mapping()
 
 
 application = App()
+
+
+
