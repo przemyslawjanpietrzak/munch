@@ -16,7 +16,16 @@ html(lang="en")
             .options
       .inner#inner
         .content#content
+          .message-wrapper.them
+            .circle-wrapper.animated.bounceIn
+            .text-wrapper.animated.fadeIn Hello there!
+          .message-wrapper.them
+            .circle-wrapper.animated.bounceIn
+            .text-wrapper.animated.fadeIn Hello there!
+          .message-wrapper.me
+            .circle-wrapper.animated.bounceIn
+            .text-wrapper.animated.fadeIn Me
       .bottom#bottom
-        textarea.input#input
-        .send#send
-        
+        form#form(action="none")
+          textarea.input#input
+          button.send#send
