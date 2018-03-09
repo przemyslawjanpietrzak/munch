@@ -16,7 +16,7 @@
         fetch(`/painting/${ message }`)
             .then(response => response.json())
             .then(response => {
-                const link = `<a class="link" href="${ response.url }" target="_blank">Link</a>`
+                const link = `<a class="link" href="${ response.url }" target="_blank">${ response.url }</a>`
                 const element = document.createElement('div');
                 element.innerHTML = getMessage(link, 'them');
                 content.appendChild(element);
