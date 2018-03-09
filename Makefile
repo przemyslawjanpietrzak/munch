@@ -15,7 +15,7 @@ server:
 	gunicorn api.main:application
 
 test:
-	pytest text_recognition/test*.py api/test*.py
+	pytest text_recognition/test*.py api/test*.py -vvv
 
 train:
 	python text_recognition/train.py
