@@ -1,3 +1,5 @@
+import json
+
 import falcon
 
 from settings.main import BASE_DIR
@@ -13,7 +15,8 @@ class PaintingView:
     def on_get(self, request, response, question):
         try:
             painting_url = find_painting(question)
-            response.body = painting_url
+            response.content_type = 'application/json'
+            response.body = json.dumps({'url': painting_url })
         except PaintingNotFound:
             response.status = falcon.HTTP_404
 
@@ -21,7 +24,7 @@ class PaintingView:
 class StaticResource:
 
     def on_get(self, req, resp, filename):
-        if filename not in ['index.html', 'style.css']:
+        if filename not in ['index.html', 'style.css', 'script.js']:
             resp.status = falcon.HTTP_403
             return
         resp.status = falcon.HTTP_200

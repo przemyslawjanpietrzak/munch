@@ -7,8 +7,9 @@
     "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001",
     "clean": "rm -rf dist",
     "build:css": "node-sass webapp/style.sass --output dist/",
+    "build:js": "cp webapp/script.js dist/",
     "build:html": "pug --pretty webapp/index.pug --out dist/",
-    "build": "npm run clean && npm run build:css && npm run build:html"
+    "build": "npm run clean && npm run build:css && npm run build:html && npm run build:js"
   },
   "repository": {
     "type": "git",

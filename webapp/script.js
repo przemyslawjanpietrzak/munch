@@ -11,7 +11,18 @@
     const input = document.getElementById('input');
     const sendButton = document.getElementById('send');
     const inner = document.getElementById('inner');
-    
+
+    const fetchResponse = (message) => {
+        fetch(`/painting/${ message }`)
+            .then(response => response.json())
+            .then(response => {
+                const link = `<a href="${ response.url }">Link</a>`
+                const element = document.createElement('div');
+                element.innerHTML = getMessage(link, 'them');
+                content.appendChild(element);
+                inner.scroll({ top: inner.scrollHeight });
+            });
+    }
 
     sendButton.addEventListener('click', () => {
         const message = input.value;
@@ -24,6 +35,7 @@
         input.value = '';
         inner.scroll({ top: inner.scrollHeight });
         input.focus();
+        fetchResponse(message);
     });
 
 })()
