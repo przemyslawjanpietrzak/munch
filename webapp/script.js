@@ -16,9 +16,15 @@
         fetch(`/painting/${ message }`)
             .then(response => response.json())
             .then(response => {
-                const link = `<a href="${ response.url }">Link</a>`
+                const link = `<a href="${ response.url }" target="_blank">Link</a>`
                 const element = document.createElement('div');
                 element.innerHTML = getMessage(link, 'them');
+                content.appendChild(element);
+                inner.scroll({ top: inner.scrollHeight });
+            })
+            .catch(() => {
+                const element = document.createElement('div');
+                element.innerHTML = getMessage('not found', 'them');
                 content.appendChild(element);
                 inner.scroll({ top: inner.scrollHeight });
             });
