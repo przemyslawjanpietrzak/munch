@@ -7,11 +7,13 @@
 ### Chatbot
 For finding painting purpose. Base on Rasa_NLU natural language processing, Falcon HTTP handling.
 
+![alt tag](https://przemyslawjanpietrzak.github.io/munch-screenshot.png)
+
 ### Run 
 
 `docker pull przemyslawjanpietrzak/munch:first` pull docker image
 
-`docker run -i -t --network host munch:latest` run docker container on port 8000
+`docker run -i -t --network host przemyslawjanpietrzak/munch:first` run docker container on port 8000
 
 ### Build
 `make install` - install python's libs and spyCy en package
@@ -26,7 +28,9 @@ For finding painting purpose. Base on Rasa_NLU natural language processing, Falc
 
 `make server` - run http server on your localhost
 
-`make clean` - remove all dist files 
+`make clean` - remove all dist files
+
+`docker build -t munch .` - build docker container
 
 ### Trainer
 
