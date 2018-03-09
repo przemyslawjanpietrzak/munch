@@ -9,14 +9,14 @@
 
     const content = document.getElementById('content');
     const input = document.getElementById('input');
-    const sendButton = document.getElementById('send');
+    const form = document.getElementById('form');
     const inner = document.getElementById('inner');
 
     const fetchResponse = (message) => {
         fetch(`/painting/${ message }`)
             .then(response => response.json())
             .then(response => {
-                const link = `<a href="${ response.url }" target="_blank">Link</a>`
+                const link = `<a class="link" href="${ response.url }" target="_blank">Link</a>`
                 const element = document.createElement('div');
                 element.innerHTML = getMessage(link, 'them');
                 content.appendChild(element);
@@ -30,7 +30,8 @@
             });
     }
 
-    sendButton.addEventListener('click', () => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
         const message = input.value;
         if (!message) {
             return;
