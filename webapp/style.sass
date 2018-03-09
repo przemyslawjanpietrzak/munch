@@ -14,7 +14,7 @@ $trans: 0.3s ease
   box-sizing: border-box
 
 body
-  background-color: $orange
+  background-color: lighten($blue, 20%)
 
 .title
   color: $white
@@ -62,8 +62,8 @@ body
     top: 0
     z-index: $nav + 10
 
-    background-color: $red
-    border-bottom: 3px solid darken($red, 10%)
+    background-color: $blue
+    border-bottom: 3px solid darken($blue, 10%)
     color: $white
     box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1)
 
@@ -139,13 +139,11 @@ body
     top: 0
     padding: 0 5%
     resize: none
-    overflow: scroll
     padding-top: ($navHeight/2) - 8
     font-weight: 300
     
     &:focus
       outline: none
-      overflow: -moz-scrollbars-none
 
   .send
     position: fixed
@@ -153,7 +151,7 @@ body
     width: $navHeight/1.5
     border-radius: 50%
     border: 0
-    background: $red
+    background: $blue
     color: $white
     bottom: ($navHeight - ($navHeight/1.5)) / 2
     right: ($navHeight - ($navHeight/1.5)) / 2
@@ -192,7 +190,7 @@ body
     min-height: $navHeight/1.5
     width: 60%
     margin: 0 ($navHeight - ($navHeight/1.5)) / 2
-    box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3)
+    box-shadow: 0px 1px 0px 0px $blue
     border-radius: 2px
     font-weight: 300
     position: relative
@@ -206,21 +204,21 @@ body
   
   &.them
     .circle-wrapper, .text-wrapper
-      background: $red
+      background: $blue
       float: left
       color: $white
   
     .text-wrapper
       &:before
         border-width: 0 10px 10px 0
-        border-color: transparent $red transparent transparent
+        border-color: transparent $blue transparent transparent
         position: absolute
         top: 0
         left: -9px
   
   &.me
     .circle-wrapper, .text-wrapper
-      background: $orange
+      background: $blue
       float: right
       color: $black
 
