@@ -2,9 +2,14 @@ version: '3'
 services:
     web:
         build: .
+        links:
+            - nginx
         ports:
             - "8000:8000"
-    redis:
+            
+    nginx:
         image: "nginx:alpine"
+        links:
+            - web
         ports:
-            - "80:8000"
+            - "80:80"
