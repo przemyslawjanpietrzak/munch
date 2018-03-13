@@ -9,12 +9,6 @@ cache: pip
 services:
   - docker
 
-install:
-  npm install
-
-before_script:
-  npm run build
-
 script:
   docker build -t munch .
 

@@ -6,10 +6,13 @@ pytest=~/.virtualenvs/munch/bin/pytest
 install:
 	pip install -r requirements.txt
 	python -m spacy download en
+	npm install
 
 install-dev:
 	pip install -r requirements-dev.txt
-	npm install
+
+build-webapp:
+	npm run build
 
 server:
 	gunicorn api.main:application

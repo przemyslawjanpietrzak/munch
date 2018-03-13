@@ -6,6 +6,7 @@ ADD . /code
 RUN apt-get install build-essential
 
 RUN make install
+RUN make build-webapp
 RUN make download_data
 RUN make train
 RUN make create_db
