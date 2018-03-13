@@ -3,6 +3,7 @@ FROM python:3.5-slim
 WORKDIR /code
 ADD . /code
 
+RUN apt-get update && apt-get install build-essential -y
 
 RUN make install
 RUN make build-webapp

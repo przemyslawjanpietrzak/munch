@@ -1,3 +1,4 @@
+sudo: true
 language:
   - python
   - node
@@ -8,6 +9,9 @@ cache: pip
 
 services:
   - docker
+
+before-install:
+  - sudo apt-get update
 
 script:
   docker build -t munch .
