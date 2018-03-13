@@ -3,6 +3,7 @@ FROM python:3.5-slim
 WORKDIR /code
 ADD . /code
 
+
 RUN make install
 RUN make build-webapp
 RUN make download_data
