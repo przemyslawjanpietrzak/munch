@@ -17,6 +17,7 @@ before-install:
   - sudo apt-get install -y nodejs
 
 script:
-  python -c 'import scripts.create_db'
-  docker build -t munch .
+  - make download_data
+  - python -c 'import scripts.create_db'
+  - docker build -t munch .
 
