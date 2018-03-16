@@ -18,6 +18,8 @@ before-install:
 
 script:
   - make download_data
+  - npm install
+  - npm run build
   - python -c 'import scripts.create_db'
   - docker build -t munch .
 
