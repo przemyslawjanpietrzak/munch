@@ -1,2 +1,9 @@
 node_modules
-database.sqlite
+*.pyc
+data
+.ipynb_checkpoints
+node_modules
+.cache
+.vscode
+**/*.retry
+.pytest_cache/

@@ -1,4 +1,4 @@
-FROM  python:3.6.4-slim
+FROM  python:3.6.4-slim-stretch
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -11,7 +11,6 @@ RUN apt-get update \
 
 WORKDIR /code
 ADD . /code
-ADD database.sqlite /code/database.sqlite
 
 RUN make install
 RUN make train
