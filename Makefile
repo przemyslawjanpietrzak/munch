@@ -4,8 +4,8 @@ pytest=~/.virtualenvs/munch/bin/pytest
 pip=~/.virtualenvs/munch/bin/pip
 
 install:
-	$(pip) install -r requirements.txt
-	$(python) -m spacy download en
+	pip install -r requirements.txt
+	python -m spacy download en
 
 install-dev:
 	pip install -r requirements-dev.txt
@@ -14,13 +14,13 @@ build-webapp:
 	npm run build
 
 server:
-	$(gunicorn) api.main:application
+	gunicorn api.main:application
 
 test:
-	$(pytest) text_recognition/test*.py api/test*.py -vvv
+	pytest text_recognition/test*.py api/test*.py -vvv
 
 train:
-	$(python) text_recognition/train.py
+	python text_recognition/train.py
 
 trainer:
 	npm run rasa-nlu-trainer
@@ -30,10 +30,10 @@ download_data:
 	wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv -O data/data.csv
 
 upload_data:
-	$(python) -c 'import scripts.upload_data'
+	python -c 'import scripts.upload_data'
 
 create_db:
-	$(python) -c 'import scripts.create_db'
+	python -c 'import scripts.create_db'
 
 clean_db:
 	rm -f database.sqlite
