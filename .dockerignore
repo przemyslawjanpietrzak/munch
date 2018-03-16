@@ -1,0 +1,9 @@
+node_modules
+*.pyc
+data
+.ipynb_checkpoints
+node_modules
+.cache
+.vscode
+**/*.retry
+.pytest_cache/

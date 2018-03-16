@@ -1,12 +1,11 @@
 python=~/.virtualenvs/munch/bin/python
 gunicorn=~/.virtualenvs/munch/bin/gunicorn
 pytest=~/.virtualenvs/munch/bin/pytest
-
+pip=~/.virtualenvs/munch/bin/pip
 
 install:
 	pip install -r requirements.txt
 	python -m spacy download en
-	npm install
 
 install-dev:
 	pip install -r requirements-dev.txt

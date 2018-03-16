@@ -12,7 +12,19 @@ services:
 
 before-install:
   - sudo apt-get update
+  - sudo apt-get update && apt-get install build-essential curl wget -y
+  - sudo curl -sL https://deb.nodesource.com/setup_8.x | bash -
+  - sudo apt-get install -y nodejs
 
 script:
-  docker build -t munch .
+  - make download_data
+  - npm install
+  - npm run build
+  - python -c 'import scripts.create_db'
+  - docker build -t przemyslawjanpietrzak/munch:stable .
 
+deploy:
+  provider: script
+  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push przemyslawjanpietrzak/munch:stable
+  on:
+    branch: develop
