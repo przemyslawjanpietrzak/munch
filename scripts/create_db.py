@@ -12,7 +12,7 @@ db.generate_mapping(create_tables=True)
 
 @db_session
 def create_entities():
-    with open('data/data.csv', 'r') as csvfile:
+    with open('{}/data/data.csv'.format(BASE_DIR), 'r') as csvfile:
         data = csv.DictReader(csvfile)
         for row in data:
             paint = Paint(
