@@ -2,15 +2,17 @@ version: '3.3'
 services:
 
     nginx:
-        build: ./nginx
+        image: nginx
         ports:
             - "80:80"
         depends_on:
-            - app
+            - munch
         links:
-            - app
+            - munch
+        volumes:
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
            
-    app:
+    munch:
         restart: always
         image: "przemyslawjanpietrzak/munch:stable"
         expose:
