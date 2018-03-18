@@ -21,10 +21,12 @@ script:
   - npm install
   - npm run build
   - python -c 'import scripts.create_db'
-  - docker build -t przemyslawjanpietrzak/munch:stable .
+  - docker build -t przemyslawjanpietrzak/munch:$(TRAVIS_BRANCH) .
 
 deploy:
   provider: script
   script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push przemyslawjanpietrzak/munch:stable
   on:
-    branch: develop
+    branch:
+      - develop
+      - master
