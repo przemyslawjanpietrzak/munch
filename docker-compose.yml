@@ -1,14 +1,21 @@
 version: '3'
 services:
     web:
-        image: "munch"
-        ports:
-            - "8000:8000"
+        restart: always
+        image: "przemyslawjanpietrzak/munch:stable"
+        expose:
+            - "8000"
+        network_mode: "host"
 
     nginx:
-        image: "nginx:alpine"
-        build: ./nginx
-        links:
-            - web
+        image: nginx
         ports:
+            - 8080:8080
             - "80:80"
+        volumes:
+            - ./nginx/:/etc/nginx/conf.d
+        depends_on:
+            - web
+        
+            
+            
