@@ -17,4 +17,4 @@ RUN make train
 RUN make test
 
 CMD ["make", "server"]
-EXPOSE 8000
+EXPOSE 80

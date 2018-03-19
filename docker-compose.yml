@@ -1,14 +1,22 @@
-version: '3'
+version: '3.3'
 services:
-    web:
-        image: "munch"
-        ports:
-            - "8000:8000"
 
     nginx:
-        image: "nginx:alpine"
-        build: ./nginx
-        links:
-            - web
+        image: nginx
         ports:
             - "80:80"
+        depends_on:
+            - munch
+        links:
+            - munch
+        volumes:
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+           
+    munch:
+        restart: always
+        image: "przemyslawjanpietrzak/munch:stable"
+        expose:
+            - "8000"
+        ports:
+            - 8080:8080
+        command: gunicorn api.main:application --workers 2 --bind 0.0.0.0:8000
