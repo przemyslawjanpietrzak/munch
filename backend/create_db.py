@@ -2,9 +2,9 @@ import csv
 
 from pony.orm import db_session, commit
 
-from backend.backend.api.models import db, Paint
+from backend.api.models import db, Paint
 
-from settings import BASE_DIR
+from backend.settings import BASE_DIR
 
 
 db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR), create_db=True)

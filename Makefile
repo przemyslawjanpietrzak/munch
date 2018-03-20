@@ -1,20 +1,12 @@
-python=~/.virtualenvs/munch/bin/python
-gunicorn=~/.virtualenvs/munch/bin/gunicorn
-pytest=~/.virtualenvs/munch/bin/pytest
-pip=~/.virtualenvs/munch/bin/pip
-
 install:
-	pip install -r requirements.txt
+	pip install -r backend/requirements.txt
 	python -m spacy download en
 
 install-dev:
-	pip install -r requirements-dev.txt
-
-build-webapp:
-	npm run build
+	pip install -r backend/requirements-dev.txt
 
 server:
-	gunicorn api.main:application -workers 2 --bind 0.0.0.0:8000
+	cd backend ; gunicorn main:application --workers 2 --bind 0.0.0.0:8000
 
 test:
 	cd backend ; pytest . -vvv ; cd ..
@@ -36,8 +28,7 @@ create_db:
 	python -c 'import backend.create_db'
 
 build_front:
-	cd frontend ; npm install && npm run build ; cd ..
-
+	cd frontend ; yarn install --flat && yarn run build ; cd ..
 
 clean_db:
 	rm -f database.sqlite
