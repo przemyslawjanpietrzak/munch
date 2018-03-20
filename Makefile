@@ -35,6 +35,10 @@ upload_data:
 create_db:
 	python -c 'import scripts.create_db'
 
+build_front:
+	cd frontend ; npm install && npm run build ; cd ..
+
+
 clean_db:
 	rm -f database.sqlite
 
