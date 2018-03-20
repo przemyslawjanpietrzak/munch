@@ -2,12 +2,10 @@ import json
 
 import falcon
 
-from settings.main import BASE_DIR
+from settings import BASE_DIR
 
 from api.managers import find_painting
 from api.exceptions import PaintingNotFound
-
-
 
 
 class PaintingView:

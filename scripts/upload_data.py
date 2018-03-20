@@ -1,5 +1,5 @@
 
-from settings.main import S3_BUCKET_NAME, AWS_PROFILE_NAME
+from backend.settings.main import S3_BUCKET_NAME, AWS_PROFILE_NAME
 
 import boto3
 import botocore

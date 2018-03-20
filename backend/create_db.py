@@ -1,10 +1,11 @@
-from api.models import db, Paint
-
-from settings.main import BASE_DIR
+import csv
 
 from pony.orm import db_session, commit
 
-import csv
+from backend.backend.api.models import db, Paint
+
+from settings import BASE_DIR
+
 
 db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR), create_db=True)
 db.generate_mapping(create_tables=True)

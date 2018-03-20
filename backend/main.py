@@ -1,7 +1,7 @@
 from api.views import PaintingView, StaticResource
 from api.models import db
 
-from settings.main import BASE_DIR
+from settings import BASE_DIR
 
 import falcon
 

@@ -17,7 +17,7 @@ server:
 	gunicorn api.main:application -workers 2 --bind 0.0.0.0:8000
 
 test:
-	pytest text_recognition/test*.py api/test*.py -vvv
+	cd backend ; pytest . -vvv ; cd ..
 
 train:
 	python text_recognition/train.py

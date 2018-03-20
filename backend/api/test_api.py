@@ -4,7 +4,7 @@ from falcon import testing
 
 import pytest
 
-from api.main import application
+from main import application
 
 
 

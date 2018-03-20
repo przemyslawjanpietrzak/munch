@@ -5,7 +5,4 @@ rasa_nlu==0.10.5
 gunicorn
 boto3
 spacy
-sklearn_crfsuite
-sklearn
-scipy
 pytest
