@@ -27,5 +27,5 @@ class StaticResource:
             return
         resp.status = falcon.HTTP_200
         resp.content_type = 'text/html' if filename == 'index.html' else 'text/css'
-        with open('{}/dist/{}'.format(BASE_DIR, filename), 'r') as f:
+        with open('dist/{}'.format(BASE_DIR, filename), 'r') as f:
             resp.body = f.read()

@@ -2,12 +2,12 @@ import csv
 
 from pony.orm import db_session, commit
 
-from backend.api.models import db, Paint
+from api.models import db, Paint
 
-from backend.settings import BASE_DIR
+from settings import BASE_DIR
 
 
-db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR), create_db=True)
+db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
 db.generate_mapping(create_tables=True)
 
 

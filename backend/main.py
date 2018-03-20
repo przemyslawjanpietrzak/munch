@@ -13,7 +13,7 @@ class App(falcon.API):
         self.add_route('/painting/{question}', PaintingView())
         self.add_route('/{filename}', StaticResource())
 
-        db.bind(provider='sqlite', filename='{}/database.sqlite'.format(BASE_DIR))
+        db.bind(provider='sqlite', filename='database.sqlite')
         db.generate_mapping()
 
 

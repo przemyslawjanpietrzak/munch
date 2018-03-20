@@ -3,8 +3,8 @@ from rasa_nlu.config import RasaNLUConfig
 
 from settings import BASE_DIR
 
-config = RasaNLUConfig('{}/backend/text_recognition/config.json'.format(BASE_DIR))
-interpreter = Interpreter.load('{}/backend/text_recognition/models/default/model/'.format(BASE_DIR), config)
+config = RasaNLUConfig('text_recognition/config.json')
+interpreter = Interpreter.load('text_recognition/models/default/model/', config)
 
 
 def parse_question(question):

@@ -25,13 +25,13 @@ upload_data:
 	python -c 'import scripts.upload_data'
 
 create_db:
-	python -c 'import backend.create_db'
+	cd backend && python -c 'import create_db' && cd ..
 
 build_front:
 	cd frontend ; yarn install --flat && yarn run build ; cd ..
 
 clean_db:
-	rm -f database.sqlite
+	rm -f backend/database.sqlite
 
 clean_data:
 	rm -rf data
