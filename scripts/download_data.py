@@ -1,4 +1,4 @@
-from settings.main import S3_BUCKET_NAME,\
+from backend.settings.main import S3_BUCKET_NAME,\
     AWS_PROFILE_NAME,\
     AWS_SECRET_ACCESS_KEY,\
     AWS_ACCESS_KEY_ID

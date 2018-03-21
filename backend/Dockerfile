@@ -12,9 +12,10 @@ RUN apt-get update \
 WORKDIR /code
 ADD . /code
 
-RUN make install
-RUN make train
-RUN make test
+RUN pip install -r requirements.txt
+RUN python -m spacy download en
+
+RUN pytest . -vvv
 
 CMD ["make", "server"]
 EXPOSE 80

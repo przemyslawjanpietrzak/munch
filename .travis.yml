@@ -16,12 +16,16 @@ before-install:
   - sudo curl -sL https://deb.nodesource.com/setup_8.x | bash -
   - sudo apt-get install -y nodejs
 
+  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - sudo apt-get update && sudo apt-get install yarn
+
 script:
+  - make install
+  - make build_front
   - make download_data
-  - npm install
-  - npm run build
-  - python -c 'import scripts.create_db'
-  - docker build -t "przemyslawjanpietrzak/munch" .
+  - make create_db
+  - cd backend && docker build -t "przemyslawjanpietrzak/munch" . && cd ..
 
 deploy:
   provider: script

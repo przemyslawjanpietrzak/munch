@@ -1,23 +1,15 @@
-python=~/.virtualenvs/munch/bin/python
-gunicorn=~/.virtualenvs/munch/bin/gunicorn
-pytest=~/.virtualenvs/munch/bin/pytest
-pip=~/.virtualenvs/munch/bin/pip
-
 install:
-	pip install -r requirements.txt
+	pip install -r backend/requirements.txt
 	python -m spacy download en
 
 install-dev:
-	pip install -r requirements-dev.txt
-
-build-webapp:
-	npm run build
+	pip install -r backend/requirements-dev.txt
 
 server:
-	gunicorn api.main:application -workers 2 --bind 0.0.0.0:8000
+	cd backend && gunicorn main:application --workers 2 --bind 0.0.0.0:8000
 
 test:
-	pytest text_recognition/test*.py api/test*.py -vvv
+	cd backend && pytest . -vvv && cd ..
 
 train:
 	python text_recognition/train.py
@@ -33,10 +25,13 @@ upload_data:
 	python -c 'import scripts.upload_data'
 
 create_db:
-	python -c 'import scripts.create_db'
+	cd backend && python -c 'import create_db' && cd ..
+
+build_front:
+	cd frontend && yarn install --flat && yarn run build && cd ..
 
 clean_db:
-	rm -f database.sqlite
+	rm -f backend/database.sqlite
 
 clean_data:
 	rm -rf data
@@ -48,3 +43,28 @@ clean:
 	make clean_db
 	make clean_data
 	make clean_models
+
+provision:
+	sudo apt-get update
+	sudo apt-get install \
+		apt-transport-https \
+		ca-certificates \
+		curl \
+		software-properties-common
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	sudo apt-key fingerprint 0EBFCD88
+	sudo add-apt-repository \
+	"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	$(lsb_release -cs) \
+	stable"
+	sudo apt-get update
+	sudo apt-get install docker-ce
+
+	sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+	sudo chmod +x /usr/local/bin/docker-compose
+	docker-compose --version
+
+	sudo usermod -aG docker ${USER}
+
+	https://github.com/przemyslawjanpietrzak/munch
+	cd munch

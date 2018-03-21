@@ -2,12 +2,10 @@ import json
 
 import falcon
 
-from settings.main import BASE_DIR
+from settings import BASE_DIR
 
 from api.managers import find_painting
 from api.exceptions import PaintingNotFound
-
-
 
 
 class PaintingView:
@@ -29,5 +27,5 @@ class StaticResource:
             return
         resp.status = falcon.HTTP_200
         resp.content_type = 'text/html' if filename == 'index.html' else 'text/css'
-        with open('{}/dist/{}'.format(BASE_DIR, filename), 'r') as f:
+        with open('dist/{}'.format(filename), 'r') as f:
             resp.body = f.read()
