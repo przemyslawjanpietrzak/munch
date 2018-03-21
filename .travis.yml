@@ -25,7 +25,7 @@ script:
   - make build_front
   - make download_data
   - make create_db
-  - cd backend ; docker build -t "przemyslawjanpietrzak/munch" . ; cd ..
+  - cd backend && docker build -t "przemyslawjanpietrzak/munch" . && cd ..
 
 deploy:
   provider: script

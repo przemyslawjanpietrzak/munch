@@ -6,10 +6,10 @@ install-dev:
 	pip install -r backend/requirements-dev.txt
 
 server:
-	cd backend ; gunicorn main:application --workers 2 --bind 0.0.0.0:8000
+	cd backend && gunicorn main:application --workers 2 --bind 0.0.0.0:8000
 
 test:
-	cd backend ; pytest . -vvv ; cd ..
+	cd backend && pytest . -vvv && cd ..
 
 train:
 	python text_recognition/train.py
@@ -28,7 +28,7 @@ create_db:
 	cd backend && python -c 'import create_db' && cd ..
 
 build_front:
-	cd frontend ; yarn install --flat && yarn run build ; cd ..
+	cd frontend && yarn install --flat && yarn run build && cd ..
 
 clean_db:
 	rm -f backend/database.sqlite

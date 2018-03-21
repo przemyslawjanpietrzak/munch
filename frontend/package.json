@@ -6,9 +6,9 @@
   "scripts": {
     "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001",
     "clean": "rm -rf dist",
-    "build:css": "node-sass ./style.sass --output ../dist/",
-    "build:js": "cp ./script.js ../dist/",
-    "build:html": "pug --pretty index.pug --out ../dist/",
+    "build:css": "node-sass ./style.sass --output ../backend/dist/",
+    "build:js": "cp ./script.js ../backend/dist/",
+    "build:html": "pug --pretty index.pug --out ../backend/dist/",
     "build": "npm run clean && npm run build:css && npm run build:html && npm run build:js"
   },
   "repository": {
