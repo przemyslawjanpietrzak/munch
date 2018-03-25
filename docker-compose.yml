@@ -11,10 +11,10 @@ services:
             - munch
         volumes:
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-           
+
     munch:
         restart: always
-        image: "przemyslawjanpietrzak/munch:stable"
+        image: "przemyslawjanpietrzak/munch:develop"
         expose:
             - "8000"
         ports:

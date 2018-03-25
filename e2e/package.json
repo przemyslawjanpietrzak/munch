@@ -1,0 +1,11 @@
+{
+  "name": "munch-e2e",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "przemyslawjanpietrzak",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "puppeteer": "^1.2.0"
+  }
+}
