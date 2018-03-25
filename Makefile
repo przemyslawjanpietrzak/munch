@@ -20,6 +20,7 @@ trainer:
 download_data:
 	mkdir -p data
 	wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv -O data/data.csv
+	# wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/new.xls -O data/new.xls
 
 upload_data:
 	python -c 'import scripts.upload_data'

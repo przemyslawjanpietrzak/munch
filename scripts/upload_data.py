@@ -1,5 +1,5 @@
 
-from backend.settings.main import S3_BUCKET_NAME, AWS_PROFILE_NAME
+from backend.settings import S3_BUCKET_NAME, AWS_PROFILE_NAME
 
 import boto3
 import botocore
@@ -26,4 +26,4 @@ upload('text_recognition/models/default/model/entity_synonyms.json', 'entity_syn
 upload('text_recognition/models/default/model/intent_classifier.pkl', 'intent_classifier.pkl')
 upload('text_recognition/models/default/model/metadata.json', 'metadata.json')
 upload('text_recognition/models/default/model/training_data.json', 'training_data.json')
-upload('data/new.xls', 'new.xls')
+upload('data/catalog.csv', 'catalog.csv')
