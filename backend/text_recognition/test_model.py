@@ -8,6 +8,13 @@ def test_find_by_title():
     assert parsed_question['intent']['name'] == 'find_by_title'
 
 
+def test_find_by_title1():
+    parsed_question = parse_question('show me Starry Night')
+
+    assert parsed_question['entities'][0]['value'] == 'Starry Night'
+    assert parsed_question['intent']['name'] == 'find_by_title'
+
+
 def test_find_by_author():
     parsed_question = parse_question('show me a picture painted by Blake')
 
