@@ -1,6 +1,12 @@
 const puppeteer = require('puppeteer');
 const { assert } = require('chai');
 
+// const assert = (assertion, errorMessage='assertion error') => {
+//   if (!assertion) {
+//     throw errorMessage;
+//   }
+// }
+
 const options = {
     width: 1920,
     height: 1080,
@@ -13,8 +19,8 @@ const options = {
   });
   const page = await browser.newPage();
   await page.setViewport({
-    width: 1920,
-    height: 1080,
+    width: options.width,
+    height: options.height,
   });
   await page.goto('http://localhost:8000/index.html');
 
@@ -26,7 +32,11 @@ const options = {
 
   await page.waitForSelector('[data-testid="message-user"]');
   const messageElement1 = await page.$eval('[data-testid="message-user"] [data-testid="message-content"]', element => element.innerText);
-  assert(messageElement1, 'show me Allegory');
+  assert(messageElement1 === 'show me Allegory');
+
+  await page.waitForSelector('[data-testid="message-bot"]');
+  const messageElement2 = await page.$eval('[data-testid="message-bot"] [data-testid="message-content"]', element => element.innerText);
+  assert(messageElement2 === 'https://www.wga.hu/html/a/aachen/allegory.html');
 
   await browser.close();
 })();
