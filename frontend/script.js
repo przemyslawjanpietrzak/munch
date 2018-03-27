@@ -18,7 +18,8 @@
             .then(response => {
                 const link = `<a class="link" href="${ response.url }" target="_blank">${ response.url }</a>`
                 const element = document.createElement('div');
-                element.setAttribute('data-testid', 'message-bot')
+                element.setAttribute('data-testid', 'message')
+                element.setAttribute('data-test-type', 'bot')
                 element.innerHTML = getMessage(link, 'them');
                 content.appendChild(element);
                 inner.scroll({ top: inner.scrollHeight });
@@ -38,7 +39,8 @@
             return;
         }
         const element = document.createElement('div');
-        element.setAttribute('data-testid', 'message-user')
+        element.setAttribute('data-testid', 'message')
+        element.setAttribute('data-test-type', 'user')
         element.innerHTML = getMessage(message, 'me');
         content.appendChild(element);
         input.value = '';

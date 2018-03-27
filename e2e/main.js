@@ -26,17 +26,24 @@ const options = {
 
   await page.waitForSelector('#nav');
 
-//   await page.click('#input');
-//   await page.type('show me Starry Night');
   await page.click('#send');
 
-  await page.waitForSelector('[data-testid="message-user"]');
-  const messageElement1 = await page.$eval('[data-testid="message-user"] [data-testid="message-content"]', element => element.innerText);
+  await page.waitForSelector('[data-testid="message"][data-test-type="user"] [data-testid="message-content"]');
+  const messageElement1 = await page.$eval('[data-testid="message"][data-test-type="user"] [data-testid="message-content"]', element => element.innerText);
   assert(messageElement1 === 'show me Allegory');
 
-  await page.waitForSelector('[data-testid="message-bot"]');
-  const messageElement2 = await page.$eval('[data-testid="message-bot"] [data-testid="message-content"]', element => element.innerText);
+  await page.waitForSelector('[data-testid="message"][data-test-type="bot"] [data-testid="message-content"]');
+  const messageElement2 = await page.$eval('[data-testid="message"][data-test-type="bot"] [data-testid="message-content"]', element => element.innerText);
   assert(messageElement2 === 'https://www.wga.hu/html/a/aachen/allegory.html');
+
+  await page.type('#input', 'show me Starry Night', { delay: 10 });
+  await page.click('#send');
+
+  await page.waitForSelector('[data-testid="message"][data-test-type="user"]:nth-of-type(3) [data-testid="message-content"]');
+  const messageElement3 = await page.$eval('[data-testid="message"][data-test-type="user"]:nth-of-type(3) [data-testid="message-content"]', element => element.innerText);
+  assert(messageElement3 === 'show me Starry Night');
+
+  // await page.waitForSelector('dupa');
 
   await browser.close();
 })();
