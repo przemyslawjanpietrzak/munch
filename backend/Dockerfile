@@ -17,5 +17,5 @@ RUN python -m spacy download en
 
 RUN pytest . -vvv
 
-CMD ["make", "server"]
+CMD gunicorn main:application --workers=2 --bind=0.0.0.0:8000
 EXPOSE 80
