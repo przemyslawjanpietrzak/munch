@@ -1,23 +1,19 @@
 const puppeteer = require('puppeteer');
 
 const getPageObject = require('./page');
-
-const options = {
-    width: 1920,
-    height: 1080,
-};
+const { width, height, headless } = require('./settings');
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: false,
-    args: [`--window-size=${options.width},${options.height}`],
+    headless,
+    args: [`--window-size=${width},${height}`],
   });
   const page = await browser.newPage();
   const pageObject = getPageObject(page);
 
   await page.setViewport({
-    width: options.width,
-    height: options.height,
+    width,
+    height,
   });
   await page.goto('http://localhost:8000/index.html');
 
