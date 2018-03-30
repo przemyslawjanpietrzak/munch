@@ -26,6 +26,8 @@
             })
             .catch(() => {
                 const element = document.createElement('div');
+                element.setAttribute('data-testid', 'message')
+                element.setAttribute('data-test-type', 'bot')
                 element.innerHTML = getMessage('not found', 'them');
                 content.appendChild(element);
                 inner.scroll({ top: inner.scrollHeight });
