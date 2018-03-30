@@ -1,12 +1,6 @@
 const puppeteer = require('puppeteer');
 const { assert } = require('chai');
 
-// const assert = (assertion, errorMessage='assertion error') => {
-//   if (!assertion) {
-//     throw errorMessage;
-//   }
-// }
-
 const options = {
     width: 1920,
     height: 1080,
@@ -43,7 +37,10 @@ const options = {
   const messageElement3 = await page.$eval('[data-testid="message"][data-test-type="user"]:nth-of-type(3) [data-testid="message-content"]', element => element.innerText);
   assert(messageElement3 === 'show me Starry Night');
 
-  // await page.waitForSelector('dupa');
+  await page.waitForSelector('[data-testid="message"][data-test-type="bot"]:nth-of-type(4) [data-testid="message-content"]');
+  const messageElement4 = await page.$eval('[data-testid="message"][data-test-type="bot"]:nth-of-type(4) [data-testid="message-content"]', element => element.innerText);
+  assert(messageElement4 === 'https://www.wga.hu/html/a/aachen/allegory.html');
+
 
   await browser.close();
 })();
