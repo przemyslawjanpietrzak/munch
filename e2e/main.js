@@ -15,7 +15,7 @@ const { width, height, headless } = require('./settings');
     width,
     height,
   });
-  await page.goto('http://localhost:8000/index.html');
+  await page.goto('http://localhost/index.html');
 
   await pageObject.waitForPage();
   await page.click('#send');
