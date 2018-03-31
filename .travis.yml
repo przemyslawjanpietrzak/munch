@@ -20,12 +20,22 @@ before-install:
   - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   - sudo apt-get update && sudo apt-get install yarn
 
-script:
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  - sudo apt-get update 
+  - sudo apt-get install google-chrome-stable
+
+install:
   - make install
+
+script:
   - make build_front
   - make download_data
   - make create_db
   - cd backend && docker build -t "przemyslawjanpietrzak/munch" . && cd ..
+
+  - docker-compose up -d
+  - cd e2e && yarn install && node main.js && cd ..
 
 deploy:
   provider: script

@@ -20,7 +20,6 @@ trainer:
 download_data:
 	mkdir -p data
 	wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv -O data/data.csv
-	# wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/new.xls -O data/new.xls
 
 upload_data:
 	python -c 'import scripts.upload_data'
@@ -44,6 +43,9 @@ clean:
 	make clean_db
 	make clean_data
 	make clean_models
+
+kill:
+	docker kill munch_app_1 munch_web_1
 
 provision:
 	sudo apt-get update
