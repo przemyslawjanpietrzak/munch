@@ -11,6 +11,9 @@ server:
 test:
 	cd backend && pytest . -vvv && cd ..
 
+lint_backend:
+	flake8 backend  --max-line-length=120
+
 train:
 	python text_recognition/train.py
 

@@ -2,8 +2,6 @@ import json
 
 import falcon
 
-from settings import BASE_DIR
-
 from api.managers import find_painting
 from api.exceptions import PaintingNotFound
 
@@ -14,7 +12,7 @@ class PaintingView:
         try:
             painting_url = find_painting(question)
             response.content_type = 'application/json'
-            response.body = json.dumps({'url': painting_url })
+            response.body = json.dumps({'url': painting_url})
         except PaintingNotFound:
             response.status = falcon.HTTP_404
 

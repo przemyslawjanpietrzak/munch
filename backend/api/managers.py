@@ -3,7 +3,7 @@ from api.exceptions import PaintingNotFound
 
 from text_recognition.main import parse_question
 
-from pony.orm import select, db_session
+from pony.orm import db_session
 
 
 def _get_query(incident_name, entity_value):
@@ -22,9 +22,9 @@ def find_painting(question):
         raise PaintingNotFound()
 
     entity_value = parsed_question['entities'][0]['value']
-    paint = (Paint
-        .select(_get_query(incident_name, entity_value))
-        .first())
+    paint = Paint\
+        .select(_get_query(incident_name, entity_value))\
+        .first()
 
     if paint is None:
         raise PaintingNotFound()

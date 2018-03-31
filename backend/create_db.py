@@ -16,7 +16,7 @@ def create_entities():
     with open('{}/data/data.csv'.format(BASE_DIR), 'r') as csvfile:
         data = csv.DictReader(csvfile)
         for row in data:
-            paint = Paint(
+            Paint(
                 author=row['AUTHOR'],
                 title=row['TITLE'],
                 date=row['DATE'],
@@ -30,5 +30,6 @@ def create_entities():
                 timeframe_end=row['TIMEFRAME_END'],
             )
     commit()
+
 
 create_entities()

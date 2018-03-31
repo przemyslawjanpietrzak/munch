@@ -1,6 +1,8 @@
 from pony.orm import Required, Database
 
+
 db = Database()
+
 
 class Paint(db.Entity):
     author = Required(str)

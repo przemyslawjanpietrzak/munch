@@ -25,10 +25,13 @@ before-install:
   - sudo apt-get update 
   - sudo apt-get install google-chrome-stable
 
+  - sudo apt install flake8
+
 install:
   - make install
 
 script:
+  - make lint_backend
   - make build_front
   - make download_data
   - make create_db

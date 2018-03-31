@@ -5,7 +5,7 @@ from rasa_nlu.model import Trainer
 
 from settings import BASE_DIR
 
-builder = ComponentBuilder(use_cache=True)  
+builder = ComponentBuilder(use_cache=True)
 training_data = load_data('{}/text_recognition/data.json'.format(BASE_DIR))
 trainer = Trainer(RasaNLUConfig('{}/text_recognition/config.json'.format(BASE_DIR)), builder)
 trainer.train(training_data)
