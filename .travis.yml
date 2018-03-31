@@ -35,7 +35,7 @@ script:
   - cd backend && docker build -t "przemyslawjanpietrzak/munch" . && cd ..
 
   - docker-compose up -d
-  - cd e2e && yarn install && node main.js && cd ..
+  - cd e2e && yarn install --flat && node main.js && cd ..
 
 deploy:
   provider: script
