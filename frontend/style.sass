@@ -18,12 +18,13 @@ body
 
 .title
   color: $white
+  font-size: 24px
   text-align: center
   font-weight: 100
 
 .wrapper
-  height: 520px
-  width: 1080px
+  min-height: 720px
+  max-width: 1080px
   overflow: hidden
   background-color: white
   position: fixed
@@ -34,7 +35,7 @@ body
   
   .inner
     overflow: scroll
-    height: 520px
+    height: 720px
     padding-top: $navHeight
     background: darken($white, 5%)
     overflow: -moz-scrollbars-none    
@@ -43,8 +44,6 @@ body
       padding: ($navHeight - ($navHeight/1.5)) / 2
       position: relative
       margin-bottom: $navHeight/2
-  
-  transition: $trans
 
 .nav
   position: fixed
@@ -115,15 +114,9 @@ body
           line-height: $navHeight
           text-decoration: none
           color: inherit
-          transition: $trans
 
-        transition: $trans
-      transition: $trans
-    transition: $trans
-  transition: $trans
-
-// .link
-//   color: $white
+.link
+  color: $white
 
 .bottom
   position: fixed
@@ -197,7 +190,6 @@ body
     border-radius: 2px
     font-weight: 300
     position: relative
-    // opacity: 0
     
     &:before
       content: ''
@@ -234,16 +226,11 @@ body
         position: absolute
         top: 0
         right: -9px
-    
-@media (max-width: 560px)
+
+@media (min-width: 1200px)
   .wrapper
-    width: 100%
-    height: 100%
-    height: 100vh
-    top: 0
-    left: 0
-    transform: translateX(0)
-    
-    .inner
-      height: 100%
-      height: 100vh
+    min-width: 1080px
+
+@media (max-width: 1200px)
+  .wrapper
+    min-width: 800px
