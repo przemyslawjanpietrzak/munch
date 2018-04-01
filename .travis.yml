@@ -35,14 +35,14 @@ script:
   - make build_front
   - make download_data
   - make create_db
-  - cd backend && docker build -t "przemyslawjanpietrzak/munch" . && cd ..
+  - cd backend && docker build -t munch . && cd ..
 
   - docker-compose up -d
   - cd e2e && yarn install --flat && node main.js && cd ..
 
 deploy:
   provider: script
-  script: docker tag przemyslawjanpietrzak/munch:latest "przemyslawjanpietrzak/munch:$TRAVIS_BRANCH" && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "przemyslawjanpietrzak/munch:$TRAVIS_BRANCH"
+  script: docker tag munch:latest "przemyslawjanpietrzak/munch:$TRAVIS_BRANCH" && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "przemyslawjanpietrzak/munch:$TRAVIS_BRANCH"
   on:
     branch:
       - develop
