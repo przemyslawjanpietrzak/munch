@@ -1,8 +1,6 @@
 from api.views import PaintingView, StaticResource
 from api.models import db
 
-from settings import BASE_DIR
-
 import falcon
 
 
@@ -18,6 +16,3 @@ class App(falcon.API):
 
 
 application = App()
-
-
-

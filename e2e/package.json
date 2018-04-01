@@ -7,5 +7,8 @@
   "dependencies": {
     "chai": "^4.1.2",
     "puppeteer": "^1.2.0"
+  },
+  "resolutions": {
+    "debug": "3.1.0"
   }
 }

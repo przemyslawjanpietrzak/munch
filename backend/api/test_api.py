@@ -1,5 +1,3 @@
-import json
-
 from falcon import testing
 
 import pytest
@@ -22,7 +20,7 @@ def test_find_painting_by_name(client):
     assert result.status_code == 200
     assert result.headers['content-type'] == 'application/json'
     assert result.content == b'{"url": "https://www.wga.hu/html/a/aachen/allegory.html"}'
-    
+
 
 def test_find_painting_by_name1(client):
     result = client.simulate_get('/painting/show me Starry Night')

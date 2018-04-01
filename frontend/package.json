@@ -9,7 +9,7 @@
     "build:css": "node-sass ./style.sass --output ../backend/dist/",
     "build:js": "cp ./script.js ../backend/dist/",
     "build:html": "pug --pretty index.pug --out ../backend/dist/",
-    "build": "npm run clean && npm run build:css && npm run build:html && npm run build:js"
+    "build": "yarn run clean && yarn run build:css && yarn run build:html && yarn run build:js"
   },
   "repository": {
     "type": "git",
