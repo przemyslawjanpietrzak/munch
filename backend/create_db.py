@@ -16,7 +16,7 @@ def create_entities():
     with open('{}/data/data.csv'.format(BASE_DIR), 'r') as csvfile:
         data = csv.DictReader(csvfile)
         for row in data:
-            Paint(
+            paint = Paint(  # noqa: F841
                 author=row['AUTHOR'],
                 title=row['TITLE'],
                 date=row['DATE'],
