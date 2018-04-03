@@ -14,9 +14,9 @@ services:
 
     munch:
         restart: always
-        image: "munch:latest"
+        image: "przemyslawjanpietrzak/munch:develop"
         expose:
             - "8000"
         ports:
             - 8080:8080
-        command: gunicorn api.main:application --workers 2 --bind 0.0.0.0:8000
+        command: gunicorn main:application --workers 2 --bind 0.0.0.0:8000
