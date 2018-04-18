@@ -13,31 +13,37 @@ main =
 -- MODEL
 
 type alias Message = String
--- type Messages = List Message
-type alias Model = Message
+type alias Messages = List Message
+type alias Model = { messages : Messages }
 model : Model
-model =  "init"
+model =  { messages = ["a", "b"] }
 
 -- UPDATE
 type Msg
     = Content String
+
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     Content content ->
-      content
+      { model | messages = content :: model.messages }
 
 -- VIEW
--- showMessages : Model -> Html Messages
--- showMessages model =
---     div [  ] [ text model ]
+showMessage : Message -> Html Msg
+showMessage message = div [] [ text message ]
+
+showMessages : Messages -> Html Msg
+showMessages messages =
+  ul [] (
+    List.map showMessage messages
+  )
 
 view : Model -> Html Msg
 view model =
   div []
     [ input [ type_ "text", placeholder "Name", onInput Content ] []
-    ,div [  ] [ text model ]
-      -- , showMessages model
+    -- , div [  ] [ text model ]
+      , showMessages ( model.messages )
     ]
     -- , input [ type_ "password", placeholder "Password", onInput Password ] []
     -- , input [ type_ "password", placeholder "Re-enter Password", onInput PasswordAgain ] []

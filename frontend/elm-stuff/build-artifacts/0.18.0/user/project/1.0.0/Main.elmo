@@ -1,9 +1,42 @@
+var _user$project$Main$showMessage = function (message) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(message),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$showMessages = function (messages) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$Main$showMessage, messages));
+};
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		return _p0._0;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				messages: {ctor: '::', _0: _p0._0, _1: model.messages}
+			});
 	});
-var _user$project$Main$model = 'init';
+var _user$project$Main$model = {
+	messages: {
+		ctor: '::',
+		_0: 'a',
+		_1: {
+			ctor: '::',
+			_0: 'b',
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$Model = function (a) {
+	return {messages: a};
+};
 var _user$project$Main$Content = function (a) {
 	return {ctor: 'Content', _0: a};
 };
@@ -31,14 +64,7 @@ var _user$project$Main$view = function (model) {
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(model),
-						_1: {ctor: '[]'}
-					}),
+				_0: _user$project$Main$showMessages(model.messages),
 				_1: {ctor: '[]'}
 			}
 		});
