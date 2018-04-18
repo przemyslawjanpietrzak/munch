@@ -12,11 +12,11 @@ main =
 
 -- MODEL
 
-type alias Message = String
+type alias Message = { content: String, isBot: Bool }
 type alias Messages = List Message
 type alias Model = { messages : Messages }
 model : Model
-model =  { messages = ["a", "b"] }
+model =  { messages = [] }
 
 -- UPDATE
 type Msg
@@ -26,11 +26,16 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     Content content ->
-      { model | messages = content :: model.messages }
+      { model | messages = { content = content, isBot = False } :: model.messages }
 
 -- VIEW
 showMessage : Message -> Html Msg
-showMessage message = div [] [ text message ]
+showMessage message = div
+  [ classList [
+    ( "bot", message.isBot ),
+    ( "user", not message.isBot )
+  ]]
+  [ text message.content ]
 
 showMessages : Messages -> Html Msg
 showMessages messages =
