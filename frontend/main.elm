@@ -1,6 +1,6 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onInput, onClick)
 
 
 main =
@@ -14,19 +14,23 @@ main =
 
 type alias Message = { content: String, isBot: Bool }
 type alias Messages = List Message
-type alias Model = { messages : Messages }
+type alias Model = { messages : Messages, inputField : String }
 model : Model
-model =  { messages = [] }
+model =  { messages = [], inputField = "" }
 
 -- UPDATE
 type Msg
     = Content String
+    | Send String
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     Content content ->
-      { model | messages = { content = content, isBot = False } :: model.messages }
+      { model | inputField = content }
+    Send message -> 
+      model
+      -- { model | messages = { content = content, isBot = False } :: model.messages }
 
 -- VIEW
 showMessage : Message -> Html Msg
@@ -49,6 +53,7 @@ view model =
     [ input [ type_ "text", placeholder "Name", onInput Content ] []
     -- , div [  ] [ text model ]
       , showMessages ( model.messages )
+      , button [ ] [ text "send" ]
     ]
     -- , input [ type_ "password", placeholder "Password", onInput Password ] []
     -- , input [ type_ "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
