@@ -9,19 +9,17 @@ import Json.Decode as Decode
 
 main =
     Html.program
-        {
-        view = view
+        { view = view
         , update = update
-        ,init = init
+        , init = init
         , subscriptions = subscriptions
         }
 
 
 init : ( Model, Cmd Msg )
-init  =
-    (
-        { messages = [], inputField = "show me allegory" }
-        , Cmd.none
+init =
+    ( { messages = [], inputField = "show me allegory" }
+    , Cmd.none
     )
 
 
@@ -69,11 +67,15 @@ update msg model =
             , getRandomGif model.inputField
             )
 
-        Response (Ok newUrl) ->
+        Response (Ok response) ->
             ( model, Cmd.none )
 
         Response (Err _) ->
-            ( model, Cmd.none )
+            ( { model
+                | messages = { content = "not found", isBot = True } :: model.messages
+              }
+            , Cmd.none
+            )
 
 
 
@@ -81,17 +83,17 @@ update msg model =
 
 
 getRandomGif : String -> Cmd Msg
-getRandomGif topic =
+getRandomGif title =
     let
         url =
-            "http://munch.today/inex.html" ++ topic
+            "/paintings/" ++ title
     in
         Http.send Response (Http.get url decodeGifUrl)
 
 
 decodeGifUrl : Decode.Decoder String
 decodeGifUrl =
-    Decode.at [ "data", "image_url" ] Decode.string
+    Decode.at [ "url" ] Decode.string
 
 
 
