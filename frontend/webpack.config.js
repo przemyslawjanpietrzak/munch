@@ -95,7 +95,7 @@ if (MODE === "development") {
             contentBase: path.join(__dirname, "src"),
             historyApiFallback: true,
             proxy: {
-              "/painting": "http://munch/today"
+              "/painting": "http://localhost"
             }
         }
     };
