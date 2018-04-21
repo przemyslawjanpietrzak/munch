@@ -86,7 +86,7 @@ getRandomGif : String -> Cmd Msg
 getRandomGif title =
     let
         url =
-            "/paintings/" ++ title
+            "/painting/" ++ title
     in
         Http.send Response (Http.get url decodeGifUrl)
 
