@@ -20,7 +20,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { messages = [], inputField = "show me allegory" }
+    ( { messages = [], inputField = "show me Allegory" }
     , Cmd.none
     )
 
@@ -56,6 +56,11 @@ type Msg
     | Response (Result Http.Error String)
 
 
+addToMessages : Messages -> String -> Bool -> Messages
+addToMessages messages content isBot =
+    messages ++ [ { content = content, isBot = isBot } ]
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -64,17 +69,19 @@ update msg model =
 
         Send ->
             ( { inputField = ""
-              , messages = { content = model.inputField, isBot = False } :: model.messages
+              , messages = addToMessages model.messages model.inputField False
               }
             , getUrl model.inputField
             )
 
         Response (Ok response) ->
-            ( model, Cmd.none )
+            ( { model | messages = addToMessages model.messages response True }
+            , Cmd.none
+            )
 
         Response (Err _) ->
             ( { model
-                | messages = { content = "not found", isBot = True } :: model.messages
+                | messages = addToMessages model.messages "Not found" True
               }
             , Cmd.none
             )
@@ -108,63 +115,70 @@ showMessage message =
         [ classList
             [ ( "them", message.isBot )
             , ( "me", not message.isBot )
-            , ("message-wrapper", True)
+            , ( "message-wrapper", True )
+            ]
+        , attribute "data-testid" "message"
+        , attribute "data-test-type"
+            (if message.isBot then
+                "bot"
+             else
+                "user"
+            )
+        ]
+        [ div [ class "circle-wrapper animated bounceIn" ] []
+        , div [ class "text-wrapper animated fadeIn" ]
+            [ a
+                [ classList
+                    [ ( "link", message.isBot )
+                    ]
+                , href message.content
+                , target "_blank"
+                , attribute "data-testid" "message-content"
+                ]
+                [ text message.content ]
             ]
         ]
-        [
-            div [ class "circle-wrapper animated bounceIn" ] [ ]
-            , div [ class "text-wrapper animated fadeIn" ] [
-                a [
-                    classList [
-                        ("link" , message.isBot)
-                    ]
-                    , href message.content
-                    , target "_blank"
-                    ]
-                    [ text message.content ]
-            ]
-            
-        ]
+
 
 showMessages : Messages -> Html Msg
 showMessages messages =
-    div [  class "content" , id "content" ]
+    div [ class "content", id "content" ]
         (List.map showMessage messages)
+
 
 view : Model -> Html Msg
 view model =
     body []
         [ myStylesheet |> toStyleNode
         , h1 [ class selectors.title ] [ text "Painting chatbot" ]
-        , div [ class "wrapper" ] [
-            div [class "nav",  id "nav" ] [
-                div [ class "default-nav" ] [
-                    div [ class "main-nav" ] [
-                        div [ class "toggle" ] []
-                        , div [ class "main-nav-item" ] [
-                            a [ class "main-nav-item-link", href "#"] [ text "Munch"]
-                        ],
-                        div [ class "options" ] []
+        , div [ class "wrapper" ]
+            [ div [ class "nav", id "nav" ]
+                [ div [ class "default-nav" ]
+                    [ div [ class "main-nav" ]
+                        [ div [ class "toggle" ] []
+                        , div [ class "main-nav-item" ]
+                            [ a [ class "main-nav-item-link", href "#" ] [ text "Munch" ]
+                            ]
+                        , div [ class "options" ] []
+                        ]
+                    ]
+                ]
+            , div [ class "inner", id "inner" ]
+                [ showMessages model.messages
+                ]
+            , div [ class "bottom", id "bottom" ]
+                [ Html.form [ id "form", action "#", Html.Events.onSubmit Send ]
+                    [ input [ class "input", id "input", value model.inputField, onInput Content ] []
+                    , button [ class "send", id "send" ] [ text "send" ]
                     ]
                 ]
             ]
-            , div [ class "inner" , id "inner"] [
-                
-                showMessages model.messages
-                
-            ]
-            , div [ class "bottom", id "bottom" ] [
-                Html.form [ id "form" , action "#" , Html.Events.onSubmit Send] [
-                    input [ class "input", id "input", value model.inputField, onInput Content] []
-                    , button [ class "send", id "send" ] [ text "send" ]
+        ]
 
-                ]
-            ]
-        ]
-        ]
 
 
 -- subscriptions
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
