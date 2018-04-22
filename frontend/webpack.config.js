@@ -86,7 +86,17 @@ if (MODE === "development") {
                             }
                         }
                     ]
-                }
+                },
+                {
+                    test: /\.css$/,
+                    exclude: [/elm-stuff/, /node_modules/],
+                    loaders: ["style-loader", "css-loader"]
+                },
+                {
+                    test: /\.sass$/,
+                    exclude: [/elm-stuff/, /node_modules/],
+                    loaders: ["style-loader", "css-loader", "sass-loader"]
+                },
             ]
         },
         devServer: {
