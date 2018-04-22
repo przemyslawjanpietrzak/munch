@@ -6,7 +6,9 @@ import Html.Events exposing (onInput, onClick)
 import Http
 import Json.Decode as Decode
 
-import Stylesheet exposing (..)
+import Stylesheet exposing (toStyleNode)
+
+import Styles exposing (myStylesheet)
 
 main =
     Html.program
@@ -120,9 +122,10 @@ showMessages messages =
 
 view : Model -> Html Msg
 view model =
-    div []
+    div [ ]
         [
-            h1 [style Stylesheet.title ] [text "hello css" ]
+            myStylesheet |> toStyleNode
+            , h1 [ class "myClass" ] [text "hello css" ]
             ,input [ type_ "text", placeholder "Name", value model.inputField, onInput Content ] []
         , showMessages (model.messages)
         , button [ onClick Send ] [ text "send" ]
