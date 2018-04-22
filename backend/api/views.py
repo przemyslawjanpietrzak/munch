@@ -20,7 +20,7 @@ class PaintingView:
 class StaticResource:
 
     def on_get(self, req, resp, filename):
-        if filename not in ['index.html', 'style.css', 'script.js']:
+        if filename not in ['index.html', 'style.css', 'index.js']:
             resp.status = falcon.HTTP_403
             return
         resp.status = falcon.HTTP_200
