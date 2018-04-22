@@ -30,12 +30,16 @@ install:
 
 script:
   - make lint_backend
+
   - make build_front
+  - cp -r frontend/dist backend
+
   - make download_data
   - make create_db
   - cd backend && docker build -t munch . && cd ..
 
   - docker-compose up -d
+
   - cd e2e && yarn install --flat && node main.js && cd ..
 
 deploy:
