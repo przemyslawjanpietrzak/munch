@@ -112,7 +112,7 @@ if (MODE === "development") {
 }
 
 if (MODE === "production") {
-    module.exports = merge(common, {
+    module.exports = { ...common,
         plugins: [],
         module: {
             rules: [
@@ -127,5 +127,5 @@ if (MODE === "production") {
                 }
             ]
         }
-    });
+    };
 }

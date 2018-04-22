@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "trainer": "rasa-nlu-trainer --source='text_recognition/data.json' --port=8001",
+    "lint": "elm-format src --validate",
     "clean": "rm -rf dist",
     "elm": "elm",
     "elm-package": "elm-package",
     "elm-format": "elm-format",
     "start": "webpack-dev-server --hot --port 3000 --colors",
-    "build:css": "node-sass ./style.sass --output ../backend/dist/",
-    "build:js": "cp ./script.js ../backend/dist/",
-    "build:html": "pug --pretty index.pug --out ../backend/dist/",
-    "build": "yarn run clean && yarn run build:css && yarn run build:html && yarn run build:js"
+    "css": "node-sass ./src/style.sass --output ./dist/",
+    "copy": "cp src/index.html dist/",
+    "production": "webpack --colors",
+    "build": "yarn clean && yarn lint && yarn production && yarn copy && yarn css"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,6 @@
     "elm-webpack-loader": "^4.5.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "4.7.2",
-    "pug": "2.0.0",
-    "pug-cli": "1.0.0-alpha6",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
