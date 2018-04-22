@@ -6,6 +6,8 @@ text_recognition/models
 text_recognition/projects
 .ipynb_checkpoints
 node_modules
+elm-stuff
+yarn-error.log
 .cache
 .vscode
 **/*.retry

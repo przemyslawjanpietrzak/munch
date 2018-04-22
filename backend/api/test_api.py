@@ -45,7 +45,7 @@ def test_static_files(client):
     assert result.status_code == 200
     assert result.headers['content-type'] == 'text/css'
 
-    result = client.simulate_get('/script.js')
+    result = client.simulate_get('/index.js')
     assert result.status_code == 200
 
 

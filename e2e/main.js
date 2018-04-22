@@ -15,7 +15,7 @@ const { width, height, headless } = require('./settings');
     width,
     height,
   });
-  await page.goto('http://localhost/index.html');
+  await page.goto('http://localhost:3000/');
 
   await pageObject.waitForPage();
   await page.click('#send');
@@ -31,7 +31,7 @@ const { width, height, headless } = require('./settings');
   await pageObject.sendMessage('Lorem Ipsum');
   
   await pageObject.assertMessageContent({ messageIndex: 5, expectedContent: 'Lorem Ipsum' });
-  await pageObject.assertMessageContent({ messageIndex: 6, expectedContent: 'not found', isBot: true });
+  await pageObject.assertMessageContent({ messageIndex: 6, expectedContent: 'Not found', isBot: true });
 
   await browser.close();
 })();
