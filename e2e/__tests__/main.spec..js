@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
-const getPageObject = require('./page');
-const { width, height, headless } = require('./settings');
+const getPageObject = require('../page');
+const { width, height, headless } = require('../settings');
 
-(async () => {
+test('', async () => {
   const browser = await puppeteer.launch({
     headless:  headless,
     args: [`--window-size=${width},${height}`],
@@ -15,7 +15,7 @@ const { width, height, headless } = require('./settings');
     width,
     height,
   });
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://munch.today/index.html');
 
   await pageObject.waitForPage();
   await page.click('#send');
@@ -34,4 +34,4 @@ const { width, height, headless } = require('./settings');
   await pageObject.assertMessageContent({ messageIndex: 6, expectedContent: 'Not found', isBot: true });
 
   await browser.close();
-})();
+}, 20000);
