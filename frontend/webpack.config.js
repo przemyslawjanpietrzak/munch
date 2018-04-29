@@ -4,7 +4,6 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 var MODE = process.env.npm_lifecycle_event === "prod" ? "production" : "development";
 var filename = MODE == "production" ? "[name]-[hash].js" : "index.js";
-console.log(MODE, filename);
 
 var common = {
     mode: MODE,
@@ -23,45 +22,6 @@ var common = {
         modules: [path.join(__dirname, "src"), "node_modules"],
         extensions: [".js", ".elm", ".scss", ".png"]
     },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.scss$/,
-                exclude: [/elm-stuff/, /node_modules/],
-                loaders: ["style-loader", "css-loader", "sass-loader"]
-            },
-            {
-                test: /\.css$/,
-                exclude: [/elm-stuff/, /node_modules/],
-                loaders: ["style-loader", "css-loader"]
-            },
-            {
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                exclude: [/elm-stuff/, /node_modules/],
-                loader: "url-loader",
-                options: {
-                    limit: 10000,
-                    mimetype: "application/font-woff"
-                }
-            },
-            {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                exclude: [/elm-stuff/, /node_modules/],
-                loader: "file-loader"
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: "file-loader"
-            }
-        ]
-    }
 };
 
 if (MODE === "development") {
@@ -86,16 +46,6 @@ if (MODE === "development") {
                             }
                         }
                     ]
-                },
-                {
-                    test: /\.css$/,
-                    exclude: [/elm-stuff/, /node_modules/],
-                    loaders: ["style-loader", "css-loader"]
-                },
-                {
-                    test: /\.sass$/,
-                    exclude: [/elm-stuff/, /node_modules/],
-                    loaders: ["style-loader", "css-loader", "sass-loader"]
                 },
             ]
         },
