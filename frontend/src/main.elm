@@ -1,12 +1,14 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (href, id, class, value, action, attribute, target, classList)
 import Html.Events exposing (onInput, onClick)
 import Http
 import Json.Decode as Decode
-import Stylesheet exposing (toStyleNode)
-import Styles exposing (myStylesheet, selectors)
+
+import Html.Styled.Attributes exposing (css, src)
+
+import MyCss exposing (titleStyle)
 
 
 main =
@@ -149,8 +151,8 @@ showMessages messages =
 view : Model -> Html Msg
 view model =
     body []
-        [ myStylesheet |> toStyleNode
-        , h1 [ class selectors.title ] [ text "Painting chatbot" ]
+        [
+        h1 [] [ text "Painting chatbot" ]
         , div [ class "wrapper" ]
             [ div [ class "nav", id "nav" ]
                 [ div [ class "default-nav" ]
