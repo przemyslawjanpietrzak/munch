@@ -1,10 +1,6 @@
 module Main exposing (..)
 
 import Html
-
-
--- import Css exposing ()
-
 import Html.Styled.Events exposing (onInput, onClick, onSubmit)
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (href, css, id, class, value, action)
@@ -34,13 +30,13 @@ view : Model -> Html Msg
 view model =
     boilerplate
         (div []
-            [ div [ css innerStyle, id "inner" ]
+            [ div [ css innerStyle ]
                 [ showMessages model.messages
                 ]
-            , div [ css bottomStyle, id "bottom" ]
+            , div [ css bottomStyle ]
                 [ form [ id "form", action "#", onSubmit Send ]
-                    [ input [ css inputStyle, id "input", value model.inputField, onInput Content ] []
-                    , button [ css sendStyle, id "send" ] [ text "send" ]
+                    [ input [ css inputStyle, value model.inputField, onInput Content ] []
+                    , button [ css sendStyle ] [ ]
                     ]
                 ]
             ]

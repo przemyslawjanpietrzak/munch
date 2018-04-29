@@ -3,22 +3,14 @@ module Messages exposing (showMessages)
 import Css exposing (..)
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (..)
+import StyleSettings exposing (..)
 import Types exposing (..)
-
-
-navHeight : Float
-navHeight =
-    64
-
-
-paddingValue : Float
-paddingValue =
-    (navHeight - (navHeight / 1.5) / 2)
+import StyleSettings exposing (..)
 
 
 contentStyle : List Style
 contentStyle =
-    [ padding (px paddingValue)
+    [ padding (px 10)
     , position relative
     , marginBottom (px (navHeight / 2))
     ]
@@ -34,17 +26,38 @@ messageStyles =
     ]
 
 
-circleStyle : List Style
-circleStyle =
+botStyle : List Style
+botStyle =
+    [ backgroundColor mainColor
+    , float left
+    , color (rgb 255 255 255)
+    ]
+
+
+userStyle : List Style
+userStyle =
+    [ backgroundColor white
+    , float right
+    , color (rgb 0 0 0)
+    ]
+
+
+circleStyle : Bool -> List Style
+circleStyle isBot =
     [ Css.height (px (navHeight / 1.5))
     , Css.width (px (navHeight / 1.5))
     , borderRadius (pct 50)
     ]
+        ++ (if isBot then
+                botStyle
+            else
+                userStyle
+           )
 
 
-textStyle : List Style
-textStyle =
-    [ padding (px paddingValue)
+textStyle : Bool -> List Style
+textStyle isBot =
+    [ padding (px 10)
     , minHeight (px (navHeight / 1.5))
     , Css.width (pct 60)
     , margin2 (px 0) (px paddingValue)
@@ -53,16 +66,17 @@ textStyle =
     , fontWeight normal
     , position relative
     ]
+        ++ (if isBot then
+                botStyle
+            else
+                userStyle
+           )
 
 
 showMessage : Message -> Html Msg
 showMessage message =
     div
-        [ classList
-            [ ( "them", message.isBot )
-            , ( "me", not message.isBot )
-            ]
-        , css messageStyles
+        [ css messageStyles
         , attribute "data-testid" "message"
         , attribute "data-test-type"
             (if message.isBot then
@@ -71,12 +85,10 @@ showMessage message =
                 "user"
             )
         ]
-        [ div [ css circleStyle, class "animated bounceIn" ] []
-        , div [ css textStyle, class "animated fadeIn" ]
+        [ div [ css (circleStyle message.isBot) ] []
+        , div [ css (textStyle message.isBot) ]
             [ a
-                [ classList
-                    [ ( "link", message.isBot )
-                    ]
+                [ css ( if message.isBot then [ color white] else [] )
                 , href message.content
                 , Html.Styled.Attributes.target "_blank"
                 , attribute "data-testid" "message-content"
