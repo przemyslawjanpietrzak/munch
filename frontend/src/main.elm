@@ -1,19 +1,22 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (href, id, class, value, action, attribute, target, classList)
-import Html.Events exposing (onInput, onClick)
+
+
+-- import Html.Attributes exposing (href, id, class, value, action, attribute, target, classList)
+
+import Html.Styled.Events exposing (onInput, onClick)
 import Http
 import Json.Decode as Decode
-
-import Html.Styled.Attributes exposing (css, src)
-
-import MyCss exposing (titleStyle)
+import Html.Styled exposing (..)
+import Html.Styled.Attributes exposing (href, id, class, value, action, attribute, target, classList)
+import MyCss exposing (titleStyle, titleComponent)
+import Boilerplate exposing (boilerplate)
 
 
 main =
     Html.program
-        { view = view
+        { view = view >> toUnstyled
         , update = update
         , init = init
         , subscriptions = subscriptions
@@ -111,9 +114,9 @@ decodeUrl =
 -- VIEW
 
 
-showMessage : Message -> Html Msg
+showMessage : Message -> Html.Styled.Html Msg
 showMessage message =
-    div
+    Html.Styled.div
         [ classList
             [ ( "them", message.isBot )
             , ( "me", not message.isBot )
@@ -127,9 +130,9 @@ showMessage message =
                 "user"
             )
         ]
-        [ div [ class "circle-wrapper animated bounceIn" ] []
-        , div [ class "text-wrapper animated fadeIn" ]
-            [ a
+        [ Html.Styled.div [ class "circle-wrapper animated bounceIn" ] []
+        , Html.Styled.div [ class "text-wrapper animated fadeIn" ]
+            [ Html.Styled.a
                 [ classList
                     [ ( "link", message.isBot )
                     ]
@@ -137,44 +140,33 @@ showMessage message =
                 , target "_blank"
                 , attribute "data-testid" "message-content"
                 ]
-                [ text message.content ]
+                [ Html.Styled.text message.content ]
             ]
         ]
 
 
-showMessages : Messages -> Html Msg
+showMessages : Messages -> Html.Styled.Html Msg
 showMessages messages =
-    div [ class "content", id "content" ]
+    Html.Styled.div [ class "content", id "content" ]
         (List.map showMessage messages)
 
 
-view : Model -> Html Msg
+view : Model -> Html.Styled.Html Msg
 view model =
-    body []
-        [
-        h1 [] [ text "Painting chatbot" ]
-        , div [ class "wrapper" ]
-            [ div [ class "nav", id "nav" ]
-                [ div [ class "default-nav" ]
-                    [ div [ class "main-nav" ]
-                        [ div [ class "toggle" ] []
-                        , div [ class "main-nav-item" ]
-                            [ a [ class "main-nav-item-link", href "#" ] [ text "Munch" ]
-                            ]
-                        , div [ class "options" ] []
+    Html.Styled.body []
+        [ boilerplate
+            (Html.Styled.div []
+                [ Html.Styled.div [ class "inner", id "inner" ]
+                    [ showMessages model.messages
+                    ]
+                , Html.Styled.div [ class "bottom", id "bottom" ]
+                    [ Html.Styled.form [ id "form", action "#", Html.Styled.Events.onSubmit Send ]
+                        [ Html.Styled.input [ class "input", id "input", value model.inputField, onInput Content ] []
+                        , Html.Styled.button [ class "send", id "send" ] [ Html.Styled.text "send" ]
                         ]
                     ]
                 ]
-            , div [ class "inner", id "inner" ]
-                [ showMessages model.messages
-                ]
-            , div [ class "bottom", id "bottom" ]
-                [ Html.form [ id "form", action "#", Html.Events.onSubmit Send ]
-                    [ input [ class "input", id "input", value model.inputField, onInput Content ] []
-                    , button [ class "send", id "send" ] [ text "send" ]
-                    ]
-                ]
-            ]
+            )
         ]
 
 
