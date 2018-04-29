@@ -1,24 +1,15 @@
 module Main exposing (..)
 
-import Html exposing (..)
+import Html
 
 
--- import Html.Attributes exposing (href, id, class, value, action, attribute, target, classList)
+-- import Css exposing ()
 
-import Html.Styled.Events exposing (onInput, onClick)
-
-
--- import Http
--- import Json.Decode as Decode
-
+import Html.Styled.Events exposing (onInput, onClick, onSubmit)
 import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (href, id, class, value, action, attribute, target, classList)
+import Html.Styled.Attributes exposing (href, css, id, class, value, action)
 import Types exposing (..)
-
-
--- import MyCss exposing (titleStyle, titleComponent)
-
-import Boilerplate exposing (boilerplate)
+import Boilerplate exposing (boilerplate, innerStyle, bottomStyle, inputStyle, sendStyle)
 import Store exposing (..)
 import Messages exposing (showMessages)
 
@@ -39,24 +30,21 @@ init =
     )
 
 
-
-view : Model -> Html.Styled.Html Msg
+view : Model -> Html Msg
 view model =
-    Html.Styled.body []
-        [ boilerplate
-            (Html.Styled.div []
-                [ Html.Styled.div [ class "inner", id "inner" ]
-                    [ showMessages model.messages
-                    ]
-                , Html.Styled.div [ class "bottom", id "bottom" ]
-                    [ Html.Styled.form [ id "form", action "#", Html.Styled.Events.onSubmit Send ]
-                        [ Html.Styled.input [ class "input", id "input", value model.inputField, onInput Content ] []
-                        , Html.Styled.button [ class "send", id "send" ] [ Html.Styled.text "send" ]
-                        ]
+    boilerplate
+        (div []
+            [ div [ css innerStyle, id "inner" ]
+                [ showMessages model.messages
+                ]
+            , div [ css bottomStyle, id "bottom" ]
+                [ form [ id "form", action "#", onSubmit Send ]
+                    [ input [ css inputStyle, id "input", value model.inputField, onInput Content ] []
+                    , button [ css sendStyle, id "send" ] [ text "send" ]
                     ]
                 ]
-            )
-        ]
+            ]
+        )
 
 
 

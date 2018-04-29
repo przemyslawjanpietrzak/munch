@@ -1,4 +1,4 @@
-module Store exposing (..)
+module Store exposing (update)
 
 import Api exposing (getUrl)
 import Types exposing (..)

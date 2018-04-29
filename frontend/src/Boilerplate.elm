@@ -1,4 +1,4 @@
-module Boilerplate exposing (boilerplate)
+module Boilerplate exposing (boilerplate, innerStyle, bottomStyle, inputStyle, sendStyle)
 
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (href, id, class, css, value, action, attribute, target, classList)
@@ -10,10 +10,57 @@ navHeight =
     64
 
 
+paddingValue : Float
+paddingValue =
+    (navHeight - (navHeight / 1.5) / 2)
+
+
 
 -- navZindex : IntOrAuto
 -- navZindex =
 --     { value =  "100", intOrAuto = ""}
+
+
+sendStyle : List Style
+sendStyle =
+    [ position fixed
+    , height (px (navHeight / 1.5))
+    , width (px (navHeight / 1.5))
+    , borderRadius (pct -50)
+    , border (px 0)
+    , backgroundColor (rgb 33 150 15)
+    , bottom (px paddingValue)
+    , right (px paddingValue)
+    ]
+
+
+bottomStyle : List Style
+bottomStyle =
+    [ position fixed
+    , bottom (px 0)
+    , Css.left (px 0)
+    , Css.right (px 0)
+    , Css.bottom (px 0)
+    , height (px navHeight)
+    , backgroundColor (rgb 255 255 255)
+    ]
+
+
+inputStyle : List Style
+inputStyle =
+    [ Css.height (px navHeight)
+    , backgroundColor (rgb 255 255 255)
+    , border (px 0)
+    , position absolute
+    , left (px 0)
+    , top (px 0)
+    , padding2 (px 0) (pct 5)
+    , resize none
+    , fontWeight normal
+    , width (pct 100)
+
+    -- : focus:
+    ]
 
 
 titleStyle : List Style
