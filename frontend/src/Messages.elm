@@ -88,7 +88,12 @@ showMessage message =
         [ div [ css (circleStyle message.isBot) ] []
         , div [ css (textStyle message.isBot) ]
             [ a
-                [ css ( if message.isBot then [ color white] else [] )
+                [ css
+                    (if message.isBot then
+                        [ color white ]
+                     else
+                        []
+                    )
                 , href message.content
                 , Html.Styled.Attributes.target "_blank"
                 , attribute "data-testid" "message-content"

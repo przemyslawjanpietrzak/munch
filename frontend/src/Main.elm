@@ -36,7 +36,7 @@ view model =
             , div [ css bottomStyle ]
                 [ form [ id "form", action "#", onSubmit Send ]
                     [ input [ css inputStyle, value model.inputField, onInput Content ] []
-                    , button [ css sendStyle ] [ ]
+                    , button [ css sendStyle ] []
                     ]
                 ]
             ]

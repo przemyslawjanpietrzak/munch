@@ -7,11 +7,6 @@ import Css.Media as Media exposing (..)
 import StyleSettings exposing (..)
 
 
--- navZindex : IntOrAuto
--- navZindex =
---     { value =  "100", intOrAuto = ""}
-
-
 sendStyle : List Style
 sendStyle =
     [ position fixed
@@ -45,8 +40,6 @@ inputStyle : List Style
 inputStyle =
     [ Css.height (px navHeight)
     , backgroundColor white
-
-    -- , border (px 0)
     , position absolute
     , left (px 0)
     , top (px 0)
@@ -54,8 +47,6 @@ inputStyle =
     , resize none
     , fontWeight normal
     , Css.width (pct 100)
-
-    -- : focus:
     ]
 
 
@@ -122,11 +113,8 @@ defaultNav =
     , top (px 0)
     , backgroundColor mainColor
     , Css.color white
-
-    -- , border2 (px 0) (px 3) (px 3)
     , borderColor borderColorValue
-
-    -- , zIndex 110
+    , zIndex (int 5)
     ]
 
 
@@ -176,18 +164,6 @@ linkStyle =
     , Css.color white
     , textDecoration none
     ]
-
-
--- optionsStyle : List Style
--- optionsStyle =
---     [ Css.height (px 32)
---     , Css.width (px 32)
---     , backgroundImage (url "https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/ic_more_vert_white_48dp.png")
---     , backgroundSize (px 16)
---     , position absolute
---     , right (px 0)
---     , cursor Css.pointer
---     ]
 
 
 boilerplate : Html msg -> Html msg
