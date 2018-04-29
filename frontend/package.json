@@ -10,10 +10,9 @@
     "elm-package": "elm-package",
     "elm-format": "elm-format",
     "start": "webpack-dev-server --hot --port 3000 --colors",
-    "css": "node-sass ./src/style.sass --output ./dist/",
     "copy": "cp src/index.html dist/",
     "production": "webpack --colors",
-    "build": "yarn clean && yarn lint && yarn production && yarn copy && yarn css"
+    "build": "yarn clean && yarn lint && yarn production && yarn copy"
   },
   "repository": {
     "type": "git",
@@ -29,8 +28,6 @@
     "elm-hot-loader": "^0.5.4",
     "elm-webpack-loader": "^4.5.0",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "4.7.2",
-    "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15",
