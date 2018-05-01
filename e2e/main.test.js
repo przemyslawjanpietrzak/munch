@@ -16,7 +16,7 @@ beforeAll(async () => {
   page = await browser.newPage();
   pageObject = getPageObject(page);
 
-  await page.goto('http://localhost/index.html');
+  await page.goto('http://localhost/');
 });
 
 afterAll(() => {
