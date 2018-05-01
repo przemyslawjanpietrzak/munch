@@ -45,6 +45,12 @@ def test_static_files(client):
     assert result.status_code == 200
 
 
+def test_mai_view(client):
+    result = client.simulate_get('/')
+    assert result.status_code == 200
+    assert result.headers['content-type'] == 'text/html'
+
+
 def test_static_files_unauthorized_files(client):
     result = client.simulate_get('/password.txt')
     assert result.status_code == 403

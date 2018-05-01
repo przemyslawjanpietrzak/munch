@@ -27,3 +27,12 @@ class StaticResource:
         resp.content_type = 'text/html' if filename == 'index.html' else 'text/css'
         with open('dist/{}'.format(filename), 'r') as f:
             resp.body = f.read()
+
+
+class MainView:
+
+    def on_get(self, req, resp):
+        resp.status = falcon.HTTP_200
+        resp.content_type = 'text/html'
+        with open('dist/{}'.format('index.html'), 'r') as f:
+            resp.body = f.read()

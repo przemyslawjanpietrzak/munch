@@ -6,9 +6,13 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^4.1.2",
+    "jest": "^22.4.3",
     "puppeteer": "^1.2.0"
   },
   "resolutions": {
     "debug": "3.1.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }

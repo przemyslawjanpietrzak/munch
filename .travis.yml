@@ -40,7 +40,7 @@ script:
 
   - docker-compose up -d
 
-  - cd e2e && yarn install --flat && node main.js && cd ..
+  - cd e2e && yarn && yarn test && cd ..
 
 deploy:
   provider: script
