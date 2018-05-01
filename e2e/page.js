@@ -1,4 +1,4 @@
-const { assert } = require('chai');
+const { expect } = require('chai');
 
 const navSelector = '#nav';
 const userMessageSelector = '[data-testid="message"][data-test-type="user"]';
@@ -13,7 +13,7 @@ module.exports = (page) => ({
 
         await page.waitForSelector(`${messageSelector}:nth-of-type(${messageIndex}) ${contentSelector}`);
         const message = await page.$eval(`${messageSelector}:nth-of-type(${messageIndex}) ${contentSelector}`, element => element.innerText);
-        assert(message === expectedContent);
+        expect(message).to.equal(expectedContent);
     },
     sendMessage: async (message) => {
         await page.type(inputSelector, message, { delay: 10 });

@@ -3,19 +3,31 @@ const puppeteer = require('puppeteer');
 const getPageObject = require('./page');
 const { width, height, headless } = require('./settings');
 
-(async () => {
-  const browser = await puppeteer.launch({
+
+let browser;
+let pageObject;
+let page;
+
+beforeAll(async () => {
+  browser = await puppeteer.launch({
     headless:  headless,
     args: [`--window-size=${width},${height}`],
   });
-  const page = await browser.newPage();
-  const pageObject = getPageObject(page);
+  page = await browser.newPage();
+  pageObject = getPageObject(page);
 
+  await page.goto('http://localhost/index.html');
+});
+
+afterAll(() => {
+  browser.close();
+});
+
+test('find 3 pictures', async () => {
   await page.setViewport({
     width,
     height,
   });
-  await page.goto('http://localhost:3000/');
 
   await pageObject.waitForPage();
   await page.click('#send');
@@ -33,5 +45,4 @@ const { width, height, headless } = require('./settings');
   await pageObject.assertMessageContent({ messageIndex: 5, expectedContent: 'Lorem Ipsum' });
   await pageObject.assertMessageContent({ messageIndex: 6, expectedContent: 'Not found', isBot: true });
 
-  await browser.close();
-})();
+});
