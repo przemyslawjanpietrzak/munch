@@ -17,9 +17,6 @@ lint_backend:
 train:
 	python text_recognition/train.py
 
-trainer:
-	npm run rasa-nlu-trainer
-
 download_data:
 	mkdir -p data
 	wget https://s3.eu-central-1.amazonaws.com/munch-chatbot/data.csv -O data/data.csv
