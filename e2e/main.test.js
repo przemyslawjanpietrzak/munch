@@ -11,7 +11,7 @@ let page;
 beforeAll(async () => {
   browser = await puppeteer.launch({
     headless:  headless,
-    args: [`--window-size=${width},${height}`],
+    args: ['--no-sandbox', `--window-size=${width},${height}`],
   });
   page = await browser.newPage();
   pageObject = getPageObject(page);

@@ -1,9 +1,7 @@
 sudo: true
 language:
   - python
-  - node_js
 python: 3.5
-node_js: 8
 
 cache: pip
 
@@ -12,18 +10,6 @@ services:
 
 before-install:
   - sudo apt-get update
-  - sudo apt-get update && apt-get install build-essential curl wget -y
-  - sudo curl -sL https://deb.nodesource.com/setup_8.x | bash -
-  - sudo apt-get install -y nodejs
-
-  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  - sudo apt-get update && sudo apt-get install yarn
-
-  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-  - sudo apt-get update 
-  - sudo apt-get install google-chrome-stable
 
 install:
   - pip install -r requirements.txt
@@ -32,13 +18,15 @@ script:
   - make lint_backend
 
   - make build_front
-  - cp -r frontend/dist nginx 
+  - cp -r frontend/dist nginx
 
   - make download_data
   - make create_db
   - cd backend && docker build -t munch . && cd ..
 
   - docker-compose up -d
+
+  - docker run -v ~/munch/e2e/main.test.js:/code/main.test.js przemyslawjanpietrzak/munch-e2e
 
   - cd e2e && yarn && yarn test && cd ..
 
