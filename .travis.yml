@@ -32,7 +32,7 @@ script:
   - make lint_backend
 
   - make build_front
-  - cp -r frontend/dist backend
+  - cp -r frontend/dist nginx 
 
   - make download_data
   - make create_db

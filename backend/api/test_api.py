@@ -34,23 +34,3 @@ def test_find_painting_by_title(client):
     assert result.status_code == 200
     assert result.headers['content-type'] == 'application/json'
     assert result.content == b'{"url": "https://www.wga.hu/html/b/blake/00lear.html"}'
-
-
-def test_static_files(client):
-    result = client.simulate_get('/index.html')
-    assert result.status_code == 200
-    assert result.headers['content-type'] == 'text/html'
-
-    result = client.simulate_get('/index.js')
-    assert result.status_code == 200
-
-
-def test_mai_view(client):
-    result = client.simulate_get('/')
-    assert result.status_code == 200
-    assert result.headers['content-type'] == 'text/html'
-
-
-def test_static_files_unauthorized_files(client):
-    result = client.simulate_get('/password.txt')
-    assert result.status_code == 403
