@@ -3,14 +3,14 @@ module Messages exposing (showMessages)
 import Css exposing (..)
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (..)
-import StyleSettings exposing (..)
+-- import StyleSettings exposing (..)
 import Types exposing (..)
-import StyleSettings exposing (..)
+-- import StyleSettings exposing (..)
 
 
 showMessage : Message -> Html Msg
 showMessage message =
-    lli
+    li
         [ class "munch__message mdl-list__item"
         , attribute "data-testid" "message"
         , attribute "data-test-type"
