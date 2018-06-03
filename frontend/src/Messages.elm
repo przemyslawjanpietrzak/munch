@@ -10,29 +10,22 @@ import StyleSettings exposing (..)
 
 showMessage : Message -> Html Msg
 showMessage message =
-    div
-        [ attribute "data-testid" "message"
+    lli
+        [ class "munch__message mdl-list__item"
+        , attribute "data-testid" "message"
         , attribute "data-test-type"
             (if message.isBot then
                 "bot"
              else
                 "user"
             )
-        ]
-        [ div [  ] []
-        , div [  ]
-            [ a
-                [ 
-                  href message.content
-                , Html.Styled.Attributes.target "_blank"
-                , attribute "data-testid" "message-content"
-                ]
-                [ text message.content ]
-            ]
+        ]   [
+          span [ class "mdl-chip mdl-chip--contact" ] [ text "A" ]
+          , span [ class "mdl-chip__text", attribute "data-testid" "message-content" ] [ text message.content ]  
         ]
 
 
 showMessages : Messages -> Html Msg
 showMessages messages =
-    div [ id "content" ]
+    ul [ class "demo-list-item mdl-list", id "content" ]
         (List.map showMessage messages)
