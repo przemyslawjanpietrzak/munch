@@ -43,10 +43,6 @@ view model =
         )
 
 
-
--- subscriptions
-
-
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
