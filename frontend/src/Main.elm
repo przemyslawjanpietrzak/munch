@@ -29,17 +29,19 @@ init =
 view : Model -> Html Msg
 view model =
     boilerplate
-        (div []
-            [ div [ ]
-                [ showMessages model.messages
-                ]
-            , div [ ]
-                [ form [ id "form", action "#", onSubmit Send ]
-                    [ input [  id "input", value model.inputField, onInput Content ] []
-                    , button [ id "send" ] []
+        (
+             div [ class "munch__container demo-card-event mdl-card mdl-shadow--2dp" ] [
+                div [ class "munch__messages mdl-card__title mdl-card--expand" ] [ showMessages model.messages ]
+                , form [ class "munch__form mdl-card__actions mdl-card--border", id "form", action "#", onSubmit Send ] [
+                    div [ class "munch__input mdl-textfield mdl-js-textfield" ] [
+                         input [ class "mdl-textfield__input", id "input", value model.inputField, onInput Content ] []
+                            , label [ class "mdl-textfield__label" ] [ text "Text ..."]
+                        ]
+                    , div [ class "mdl-layout-spacer" ] []
+                    , div [ class "material-icons" ] [ text "send"]
                     ]
                 ]
-            ]
+                    
         )
 
 

@@ -20,7 +20,7 @@ showMessage message =
                 "user"
             )
         ]   [
-          span [ class "mdl-chip mdl-chip--contact" ] [ text "A" ]
+          span [ class "mdl-chip__contact mdl-color--teal mdl-color-text--white" ] [ text "A" ]
           , span [ class "mdl-chip__text", attribute "data-testid" "message-content" ] [ text message.content ]  
         ]
 
