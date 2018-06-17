@@ -8,15 +8,15 @@ import Css.Media as Media exposing (..)
 
 boilerplate : Html msg -> Html msg
 boilerplate child =
-    div [
-        class "demo-layout-transparent mdl-layout mdl-js-layout"
+    div
+        [ class "demo-layout-transparent mdl-layout mdl-js-layout"
         , id "munch"
-        , css [
-            Css.color (rgb 255 255 255)
+        , css
+            [ Css.color (rgb 255 255 255)
             , backgroundImage (url "/background.jpg")
             , backgroundRepeat Css.round
+            ]
         ]
-    ]
         [ header [ class "mdl-layout__header mdl-layout__header--transparent" ]
             [ div [ class "mdl-layout__header-row" ]
                 [ span [ class "mdl-layout-title" ] [ text "Munch - painting chatbot" ]
