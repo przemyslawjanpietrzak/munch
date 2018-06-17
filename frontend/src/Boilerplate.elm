@@ -10,9 +10,10 @@ boilerplate : Html msg -> Html msg
 boilerplate child =
     div [
         class "demo-layout-transparent mdl-layout mdl-js-layout"
+        , id "munch"
         , css [
             Css.color (rgb 255 255 255)
-            , backgroundImage (url "/static/background.jpg")
+            , backgroundImage (url "/background.jpg")
             , backgroundRepeat Css.round
         ]
     ]

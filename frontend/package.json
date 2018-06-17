@@ -7,7 +7,7 @@
     "lint": "elm-format src --validate",
     "clean": "rm -rf dist",
     "start": "webpack-dev-server --hot --port 3000 --colors",
-    "copy": "mkir -p dist && cp src/index.html dist/ && cp -r static dist",
+    "copy": "cp src/index.html dist/ && cp -r static dist/",
     "production": "webpack --colors",
     "build": "yarn clean && yarn lint && yarn production && yarn copy"
   },
