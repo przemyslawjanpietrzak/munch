@@ -3,99 +3,47 @@ module Messages exposing (showMessages)
 import Css exposing (..)
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (..)
-import StyleSettings exposing (..)
 import Types exposing (..)
-import StyleSettings exposing (..)
 
 
-contentStyle : List Style
-contentStyle =
-    [ padding (px 10)
-    , position relative
-    , marginBottom (px (navHeight / 2))
-    ]
+messageType : Bool -> String
+messageType isBot =
+    if isBot then
+        "bot"
+    else
+        "user"
 
 
-messageStyles : List Style
-messageStyles =
-    [ position relative
-    , overflow Css.hidden
-    , Css.width (pct 100)
-    , padding (px paddingValue)
-    , margin (px paddingValue)
-    ]
-
-
-botStyle : List Style
-botStyle =
-    [ backgroundColor mainColor
-    , float left
-    , color (rgb 255 255 255)
-    ]
-
-
-userStyle : List Style
-userStyle =
-    [ backgroundColor white
-    , float right
-    , color (rgb 0 0 0)
-    ]
-
-
-circleStyle : Bool -> List Style
-circleStyle isBot =
-    [ Css.height (px (navHeight / 1.5))
-    , Css.width (px (navHeight / 1.5))
-    , borderRadius (pct 50)
-    ]
-        ++ (if isBot then
-                botStyle
-            else
-                userStyle
-           )
-
-
-textStyle : Bool -> List Style
-textStyle isBot =
-    [ padding (px 10)
-    , minHeight (px (navHeight / 1.5))
-    , Css.width (pct 60)
-    , margin2 (px 0) (px paddingValue)
-    , boxShadow5 (px 0) (px 1) (px 0) (px 0) (rgb 33 150 15)
-    , borderRadius (px 2)
-    , fontWeight normal
-    , position relative
-    ]
-        ++ (if isBot then
-                botStyle
-            else
-                userStyle
-           )
+messageJustifyContent isBot =
+    if isBot then
+        flexStart
+    else
+        flexEnd
 
 
 showMessage : Message -> Html Msg
 showMessage message =
-    div
-        [ css messageStyles
+    li
+        [ class "mdl-list__item"
+        , css
+            [ padding (px 8)
+            , Css.width (pct 100)
+            , displayFlex
+            , justifyContent (messageJustifyContent message.isBot)
+            ]
         , attribute "data-testid" "message"
-        , attribute "data-test-type"
-            (if message.isBot then
-                "bot"
-             else
-                "user"
-            )
+        , attribute "data-test-type" (messageType message.isBot)
         ]
-        [ div [ css (circleStyle message.isBot) ] []
-        , div [ css (textStyle message.isBot) ]
-            [ a
-                [ css
-                    (if message.isBot then
-                        [ color white ]
-                     else
-                        []
-                    )
-                , href message.content
-                , Html.Styled.Attributes.target "_blank"
+        [ span
+            [ class "mdl-chip mdl-chip--contact"
+            , css [ backgroundColor (rgb 250 250 250), justifyContent flexEnd ]
+            ]
+            [ span
+                [ class "mdl-chip__contact mdl-color--teal mdl-color-text--white" ]
+                [ text "A" ]
+            , span
+                [ class "mdl-chip__text"
+                , css [ fontSize (px 15) ]
                 , attribute "data-testid" "message-content"
                 ]
                 [ text message.content ]
@@ -105,5 +53,9 @@ showMessage message =
 
 showMessages : Messages -> Html Msg
 showMessages messages =
-    div [ css contentStyle, id "content" ]
+    ul
+        [ class "demo-list-item mdl-list"
+        , id "content"
+        , css [ Css.width (pct 100) ]
+        ]
         (List.map showMessage messages)

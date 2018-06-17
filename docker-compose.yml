@@ -15,7 +15,7 @@ services:
 
     munch:
         restart: always
-        image: "munch"
+        image: "przemyslawjanpietrzak/munch:develop"
         expose:
             - "8000"
         ports:

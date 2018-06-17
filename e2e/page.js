@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const navSelector = '#nav';
+const navSelector = '#munch';
 const userMessageSelector = '[data-testid="message"][data-test-type="user"]';
 const botMessageSelector = '[data-testid="message"][data-test-type="bot"]';
 const contentSelector = '[data-testid="message-content"]';
