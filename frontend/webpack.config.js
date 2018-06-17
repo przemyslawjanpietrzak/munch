@@ -15,18 +15,18 @@ var common = {
     plugins: [
         new HTMLWebpackPlugin({
             template: "src/index.html",
-            inject: "body"
         })
     ],
     resolve: {
         modules: [path.join(__dirname, "src"), "node_modules"],
-        extensions: [".js", ".elm", ".scss", ".png"]
+        extensions: [".js", ".elm" ]
     },
 };
 
 if (MODE === "development") {
     module.exports = { ...common,
         plugins: [
+            ...common.plugins,
             new webpack.NamedModulesPlugin(),
             new webpack.NoEmitOnErrorsPlugin()
         ],
@@ -50,10 +50,9 @@ if (MODE === "development") {
             ]
         },
         devServer: {
-            inline: true,
-            stats: "errors-only",
-            contentBase: path.join(__dirname, "src"),
+            contentBase: path.join(__dirname, 'dist'),
             historyApiFallback: true,
+            compress: true,
             proxy: {
               "/painting": "http://localhost"
             }
@@ -63,7 +62,6 @@ if (MODE === "development") {
 
 if (MODE === "production") {
     module.exports = { ...common,
-        plugins: [],
         module: {
             rules: [
                 {
