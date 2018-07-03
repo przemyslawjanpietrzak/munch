@@ -15,6 +15,8 @@ boilerplate child =
             [ Css.color (rgb 255 255 255)
             , backgroundImage (url "/background.jpg")
             , backgroundRepeat Css.round
+            , Css.width (vw 100)
+            , Css.height (vh 100)
             ]
         ]
         [ header [ class "mdl-layout__header mdl-layout__header--transparent" ]
