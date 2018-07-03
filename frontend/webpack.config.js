@@ -3,13 +3,16 @@ const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 var MODE = process.env.npm_lifecycle_event === "prod" ? "production" : "development";
-var filename = MODE == "production" ? "[name]-[hash].js" : "index.js";
+var filename = MODE == "production" ? "[name]-[hash].js" : "[name].js";
 
 var common = {
     mode: MODE,
-    entry: "./src/index.js",
+    entry: {
+        index: "./src/index.js",
+        sw: "./service-worker.js",  
+    },
     output: {
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "../nginx/dist"),
         filename: filename
     },
     plugins: [
@@ -24,7 +27,8 @@ var common = {
 };
 
 if (MODE === "development") {
-    module.exports = { ...common,
+    module.exports = {
+        ...common,
         plugins: [
             ...common.plugins,
             new webpack.NamedModulesPlugin(),
@@ -61,7 +65,8 @@ if (MODE === "development") {
 }
 
 if (MODE === "production") {
-    module.exports = { ...common,
+    module.exports = {
+        ...common,
         module: {
             rules: [
                 {
