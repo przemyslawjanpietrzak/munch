@@ -16,6 +16,9 @@ let precacheConfig = [
 ];
 let cacheName = 'sw-precache-v3-sw-precache-' + (self.registration ? self.registration.scope : '');
 
+let createResponse = obj => new Response(JSON.stringify(r), {
+  headers: {'Content-Type': 'application/json'}
+});
 
 let ignoreUrlParametersMatching = [/^utm_/];
 
@@ -208,19 +211,14 @@ self.addEventListener('fetch', (event) => {
           if (keys.includes(event.request.url)) {
             return idbClient
               .get(event.request.url)
-              .then(r => new Response(JSON.stringify(r), {
-                headers: {'Content-Type': 'application/json'}
-              }))
+              .then(createResponse);
           }
           return fetch(event.request)
             .then(r => r.json())
             .then(r => idbClient
               .set(event.request.url, r)
-              .then(_ => new Response(JSON.stringify(r), {
-                headers: {'Content-Type': 'application/json'}
-              }))
-            )
-            
+              .then(_ => createResponse)
+            );
         }));
     }
   }
