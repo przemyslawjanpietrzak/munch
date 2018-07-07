@@ -3,6 +3,11 @@ import { idbFactory } from './idb-client';
 
 const idbClient = idbFactory('api-v1');
 
+const REQUEST_CACHE_LIFETIME = 10 * 1000;
+
+const now = _ => (new Date()).getTime();
+
+
 let precacheConfig = [
   ["background.jpg","eb661a7bfd811daa1ffefe7d527333ab"],
   ['index.js', '2'],
@@ -14,11 +19,7 @@ let precacheConfig = [
   ['material.indigo-pink.min.css', '7'],
   ['flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', '8'],
 ];
-let cacheName = 'sw-precache-v3-sw-precache-' + (self.registration ? self.registration.scope : '');
-
-let createResponse = obj => new Response(JSON.stringify(r), {
-  headers: {'Content-Type': 'application/json'}
-});
+let cacheName = 'munch-static-cache' + (self.registration ? self.registration.scope : '');
 
 let ignoreUrlParametersMatching = [/^utm_/];
 
@@ -127,7 +128,7 @@ self.addEventListener('install', (event) => {
                 // Bail out of installation unless we get back a 200 OK for
                 // every request.
                 if (!response.ok) {
-                  throw new Error('Request for ' + cacheKey + ' returned a response with status ' + response.status);
+                  throw new Error(`Request for ${cacheKey} returned a response with status  ${response.status}`);
                 }
 
                 return cleanResponse(response)
@@ -204,21 +205,32 @@ self.addEventListener('fetch', (event) => {
       );
     }
 
+    let createResponse = obj => new Response(JSON.stringify(obj), {
+      headers: {'Content-Type': 'application/json'}
+    });
+
+    const fetchAndSaveAPIRequest = request => fetch(event.request)
+      .then(r => r.json())
+      .then(response => idbClient
+        .set(event.request.url, { response, timestamp: now() + REQUEST_CACHE_LIFETIME })
+        .then(_ => createResponse(response))
+      );
+
     if (event.request.url.includes('/painting/')) {
       event.respondWith(idbClient
         .keys()
         .then(keys => {
           if (keys.includes(event.request.url)) {
-            return idbClient
+            return idbClient  
               .get(event.request.url)
-              .then(createResponse);
+              .then(({ response, timestamp }) => {
+                if (timestamp > now() || !navigator.onLine) {
+                  return createResponse(response);
+                }
+                return fetchAndSaveAPIRequest(event.request);
+              });
           }
-          return fetch(event.request)
-            .then(r => r.json())
-            .then(r => idbClient
-              .set(event.request.url, r)
-              .then(_ => createResponse)
-            );
+          return fetchAndSaveAPIRequest(event.request);
         }));
     }
   }
