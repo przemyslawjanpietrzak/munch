@@ -21,3 +21,17 @@ services:
         ports:
             - 8080:8080
         command: gunicorn main:application --workers 2 --bind 0.0.0.0:8000
+
+    push-service:
+        restart: always
+        image: node:8
+        working_dir: /code
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./push-service/node_modules:/code/node_modules
+            - ./push-service/server.js:/code/server.js
+            - ./new-version.txt:/code/new-version.txt
+        expose:
+            - "3000"
+        command: node server.js
