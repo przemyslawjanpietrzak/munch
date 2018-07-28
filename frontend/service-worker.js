@@ -10,14 +10,14 @@ const now = _ => (new Date()).getTime();
 
 let precacheConfig = [
   ["background.jpg","eb661a7bfd811daa1ffefe7d527333ab"],
-  ['index.js', '2'],
-  ['sw.js', '2'],
-  ['index.html', '3'],
-  ['fonts.css', '4'],
-  ['material.css', '5'],
-  ['material.min.js', '6'],
-  ['material.indigo-pink.min.css', '7'],
-  ['flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', '8'],
+  ['index.js', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['sw.js', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['index.html', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['fonts.css', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['material.css', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['material.min.js', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['material.indigo-pink.min.css', 'eb661a7bfd811daa1ffefe7d527333ab'],
+  ['flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', 'eb661a7bfd811daa1ffefe7d527333ab'],
 ];
 let cacheName = 'munch-static-cache' + (self.registration ? self.registration.scope : '');
 
