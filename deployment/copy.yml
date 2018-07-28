@@ -1,0 +1,23 @@
+---
+- hosts: munch
+  tasks:
+
+    - name: Creates directory
+      become: yes
+      become_method: sudo
+      become_user: root
+      file: path=/code/nginx/dist/static state=directory
+
+    - name: copy docker compose file
+      become: yes
+      become_method: sudo
+      become_user: root
+      copy:
+        src: "../{{ item }}"
+        dest: "/code/{{ item }}"
+      loop:
+        - "docker-compose.yml"
+        - "nginx/default.conf"
+        - "nginx/dist/index.html"
+        - "nginx/dist/index.js"
+        - "nginx/dist/static/background.jpg"

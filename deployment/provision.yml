@@ -1,0 +1,24 @@
+---
+- hosts: munch
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+
+  roles:
+    - {
+      role: angstwad.docker_ubuntu,
+      become: yes
+    }
+    - {
+      role: franklinkim.docker-compose,
+      become: yes
+    }
+
+  post_tasks:
+    - name: add user to group
+      sudo: yes
+      shell: sudo usermod -aG docker $USER
+
+    - name: restart docker service
+      sudo: yes
+      shell: sudo systemctl restart docker.service
