@@ -23,15 +23,13 @@ const send = async () => {
         applicationServerKey: urlBase64ToUint8Array(publicKey),
     });
 
-    await fetch('/subscribe', {
+    await fetch('/ps/subscribe', {
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {
             'content-type': 'application/json'
         }
-    });
-
-    
+    });    
 }
 
 if ('serviceWorker' in navigator) {

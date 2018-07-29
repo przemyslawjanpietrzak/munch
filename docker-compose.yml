@@ -7,8 +7,10 @@ services:
             - "80:80"
         depends_on:
             - munch
+            - push-service
         links:
             - munch
+            - push-service
         volumes:
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
             - ./nginx/dist:/www/static
@@ -29,9 +31,9 @@ services:
         ports:
             - "3000:3000"
         volumes:
-            - ./push-service/node_modules:/code/node_modules
-            - ./push-service/server.js:/code/server.js
-            - ./new-version.txt:/code/new-version.txt
+            - ./push-service:/code/
+            # - ./push-service/server.js:/code/server.js
+            # - ./new-version.txt:/code/new-version.txt
         expose:
             - "3000"
         command: node server.js

@@ -7,17 +7,10 @@ const REQUEST_CACHE_LIFETIME = 10 * 1000;
 
 const now = _ => (new Date()).getTime();
 
-
 let precacheConfig = [
-  ["background.jpg","eb661a7bfd811daa1ffefe7d527333ab"],
-  ['index.js', '2'],
-  ['sw.js', '2'],
-  ['index.html', '3'],
-  ['fonts.css', '4'],
-  ['material.css', '5'],
-  ['material.min.js', '6'],
-  ['material.indigo-pink.min.css', '7'],
-  ['flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', '8'],
+  ["background.jpg","__STATIC_FILE_HASH__"],
+  ['index.js', '__STATIC_FILE_HASH__'],
+  ['index.html', '__STATIC_FILE_HASH__'],
 ];
 let cacheName = 'munch-static-cache' + (self.registration ? self.registration.scope : '');
 
@@ -216,8 +209,11 @@ self.addEventListener('fetch', (event) => {
 
 self.addEventListener('push', e => {
   const { title } = e.data.json();
-  self.registration.showNotification(title, {
+  self.registration
+    .showNotification(title, {
       body: 'noti noti noti',
-      // icon: ''
-  });
+      requireInteraction: true,
+    }).then((...args) => {
+      console.log(args);
+    }).catch(err => console.error(err))
 })
