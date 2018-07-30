@@ -3,24 +3,15 @@ const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var MODE = process.env.npm_lifecycle_event === "prod" ? "production" : "development";
-var filename = MODE == "production" ? `[name].${hash[name]}.js` : "[name].js";
-
-const hash =  (() => {
-    var text = "";
-    var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-  
-    for (var i = 0; i < 10; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-  
-    return text;
-})();
+const hash = process.env.HASH;
+const MODE = "development";
+const file = process.env.FILE;
+const filename = file === 'sw' ? `[name].js` : `[name].${hash}.js`;
 
 var common = {
     mode: MODE,
     entry: {
-        index: "./src/index.js",
-        sw: "./service-worker.js",
+        [file]: file === 'app' ? "./src/index.js" : './service-worker.js',
     },
     output: {
         path: path.join(__dirname, "../nginx/dist"),
@@ -29,11 +20,11 @@ var common = {
     plugins: [
         new HTMLWebpackPlugin({
             template: "src/index.html",
-        })
+        }),
     ],
     resolve: {
         modules: [path.join(__dirname, "src"), "node_modules"],
-        extensions: [".js", ".elm"]
+        extensions: [".js", ".elm"],
     },
     devtool: process.env.NODE_ENV ? 'none' : 'source-map',
     module: {
@@ -102,20 +93,20 @@ if (MODE === "development") {
     };
 }
 
-if (MODE === "production") {
-    module.exports = {
-        ...common,
-        module: {
-            rules: [
-                ...common.module.rules,
-                {
-                    test: /\.elm$/,
-                    exclude: [/elm-stuff/, /node_modules/],
-                    use: [{
-                        loader: "elm-webpack-loader"
-                    }]
-                }
-            ]
-        }
-    };
-}
+// if (MODE === "production") {
+//     module.exports = {
+//         ...common,
+//         module: {
+//             rules: [
+//                 ...common.module.rules,
+//                 {
+//                     test: /\.elm$/,
+//                     exclude: [/elm-stuff/, /node_modules/],
+//                     use: [{
+//                         loader: "elm-webpack-loader"
+//                     }]
+//                 }
+//             ]
+//         }
+//     };
+// }

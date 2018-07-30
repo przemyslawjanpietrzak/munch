@@ -9,8 +9,9 @@ const now = _ => (new Date()).getTime();
 
 let precacheConfig = [
   ["background.jpg","__STATIC_FILE_HASH__"],
-  ['index.js', '__STATIC_FILE_HASH__'],
+  ['app.__STATIC_FILE_HASH__.js', '__STATIC_FILE_HASH__'],
   ['index.html', '__STATIC_FILE_HASH__'],
+  ['sw.js', '__STATIC_FILE_HASH__'],
 ];
 let cacheName = 'munch-static-cache' + (self.registration ? self.registration.scope : '');
 
@@ -211,9 +212,13 @@ self.addEventListener('push', e => {
   const { title } = e.data.json();
   self.registration
     .showNotification(title, {
-      body: 'noti noti noti',
+      body: 'new version is available',
       requireInteraction: true,
-    }).then((...args) => {
-      console.log(args);
-    }).catch(err => console.error(err))
-})
+    });
+  self.registration.update();
+});
+
+
+setInterval(() => {
+  console.log('hello chill.js#2 from sw');
+}, 5000);

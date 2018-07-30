@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "lint": "elm-format src --validate",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf ../nginx/dist",
     "start": "webpack-dev-server --hot --port 3000 --colors",
     "copy": "cp src/index.html ./dist/",
     "build:app": "NODE_ENV=prod FILE='app' webpack --mode=production",
     "build:sw": "NODE_ENV=prod FILE='sw' webpack --mode=production",
-    "build": "yarn clean && yarn lint && yarn build:app && yarn build:sw"
+    "build": "HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 )  yarn clean && yarn lint && yarn build:sw && yarn build:app"
   },
   "repository": {
     "type": "git",

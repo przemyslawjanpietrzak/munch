@@ -4,4 +4,3 @@ require('material-design-lite/dist/material');
 
 var Elm = require('./Main');
 Elm.Main.fullscreen();
-
