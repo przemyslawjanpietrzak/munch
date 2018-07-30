@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "elm-format src --validate",
+    "clean": "rm -rf ../nginx/dist/*",
     "start": "webpack-dev-server --hot --port 3000 --colors",
-    "copy": "cp static/background.jpg ../nginx/dist/",
+    "copy": "mkdir -p ../nginx/dist && cp assets/background.jpg ../nginx/dist/background.jpg",
     "build:app": "NODE_ENV=prod FILE='app' webpack --mode=production",
     "build:sw": "NODE_ENV=prod FILE='sw' webpack --mode=production",
     "build": "export HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13) && yarn copy && yarn build:sw && yarn build:app"
