@@ -28,7 +28,7 @@ create_db:
 	cd backend && python -c 'import create_db' && cd ..
 
 build_front:
-	cd frontend && yarn install && yarn build && cd ..
+	rm -rf nginx/dist && cd frontend && yarn build && cd ..
 
 clean_db:
 	rm -f backend/database.sqlite

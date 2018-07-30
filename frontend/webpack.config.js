@@ -8,6 +8,8 @@ const MODE = "development";
 const file = process.env.FILE;
 const filename = file === 'sw' ? `[name].js` : `[name].${hash}.js`;
 
+console.log(hash);
+
 var common = {
     mode: MODE,
     entry: {

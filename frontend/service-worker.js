@@ -218,7 +218,3 @@ self.addEventListener('push', e => {
   self.registration.update();
 });
 
-
-setInterval(() => {
-  console.log('hello chill.js#2 from sw');
-}, 5000);
